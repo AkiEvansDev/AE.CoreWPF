@@ -9,7 +9,9 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">$license$</license>
     <projectUrl>$projectUrl$</projectUrl>
+	<repository type="git" url="$projectUrl$" />
     <description>AE.CoreWPF</description>
+	<readme>README.md</readme>
     <tags>$tags$</tags>
     <dependencies>
       <group targetFramework="net6.0-windows7.0" />
