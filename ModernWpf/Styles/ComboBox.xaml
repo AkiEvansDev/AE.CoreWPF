@@ -37,7 +37,7 @@
     <Thickness x:Key="ComboBoxBackgroundBorderThicknessFocused">2</Thickness>
     <Thickness x:Key="ComboBoxDropdownBorderPadding">0</Thickness>
     <Thickness x:Key="ComboBoxDropdownContentMargin">0,4</Thickness>
-    <Thickness x:Key="ComboBoxTopHeaderMargin">0,0,0,8</Thickness>
+    <Thickness x:Key="ComboBoxTopHeaderMargin">0,0,0,4</Thickness>
     <Thickness x:Key="ComboBoxPadding">12,5,0,7</Thickness>
     <Thickness x:Key="ComboBoxEditableTextPadding">11,5,32,6</Thickness>
 

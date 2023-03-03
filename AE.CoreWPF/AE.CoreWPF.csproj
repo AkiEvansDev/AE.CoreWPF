@@ -5,7 +5,7 @@
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
-    <Version>3.0.1</Version>
+    <Version>3.0.2</Version>
 	  
     <Authors>AkiEvans</Authors>
     <Product>AE.CoreWPF</Product>
