@@ -136,6 +136,7 @@ public partial class ColorPicker : UserControl
     {
         InitializeComponent();
         SelectColor = Color.FromRgb(255, 0, 0);
+        ColorOpacityEnabled = false;
         ColorOpacity = 255;
     }
 
