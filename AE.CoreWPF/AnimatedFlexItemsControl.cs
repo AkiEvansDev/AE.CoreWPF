@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Media.Animation;
 
@@ -19,13 +17,11 @@ public class AnimatedFlexItemsControl : FlexItemsControl
         set => SetValue(AnimationDurationProperty, value);
     }
 
-    private bool ignoreAnimation;
     private bool requestUpdate;
     protected AnimationManager AnimationManager { get; }
 
     public AnimatedFlexItemsControl()
     {
-        Opacity = 0;
         AnimationManager = new AnimationManager(MarginProperty);
         AnimationManager.OnCompleted += OnAnimationManagerCompleted;
     }
@@ -37,26 +33,12 @@ public class AnimatedFlexItemsControl : FlexItemsControl
             requestUpdate = false;
             Update();
         }
-
-        Opacity = 1;
     }
 
     public override void Update()
     {
         base.Update();
         AnimationManager.Start();
-    }
-
-    protected override void OnItemsSourceChanged(IEnumerable oldValue, IEnumerable newValue)
-    {
-        ignoreAnimation = true;
-        base.OnItemsSourceChanged(oldValue, newValue);
-    }
-
-    protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
-    {
-        ignoreAnimation = true;
-        base.OnItemsChanged(e);
     }
 
     protected override void HandleChildDesiredSizeChanged(UIElement child)
@@ -79,34 +61,18 @@ public class AnimatedFlexItemsControl : FlexItemsControl
     {
         if (element != null)
         {
-            if (ignoreAnimation)
-                element.Opacity = 0;
-
-            void complite()
-            {
+            if (element.IsLoaded)
                 Update();
-                element.Opacity = 1;
-            }
-
-            if (element.IsLoaded) 
-                complite();
             else
                 element.Loaded += (s, e) =>
                 {
-                    complite();
-                    ignoreAnimation = false;
+                    Update();
                 };
         }
     }
 
     protected override void SetPosition(FrameworkElement element, int newTop, int newLeft)
     {
-        if (ignoreAnimation)
-        {
-            base.SetPosition(element, newTop, newLeft);
-            return;
-        }
-
         if (element != null)
             AnimationManager.Enqueue(element, CreateAnimation(element, newTop, newLeft));
     }

@@ -14,19 +14,49 @@ namespace AE.CoreWPF;
 public partial class ColorPicker : UserControl
 {
     private const double hH = 255; 
+    private const double oH = 165;
     private const double svAddH = 55;
     private const double svH = 200;
     private const double svV = 100;
 
     public delegate void ColorChangedDelegate(ColorPicker sender, Color color);
+    public delegate void OpacityColorChangedDelegate(ColorPicker sender, Color opacityColor);
 
     public event ColorChangedDelegate SelectColorChanged;
+    public event OpacityColorChangedDelegate SelectOpacityColorChanged;
+
+    public static readonly DependencyProperty SelectColorProperty =
+        DependencyProperty.Register(nameof(SelectColor), typeof(Color), typeof(ColorPicker), new PropertyMetadata(Color.FromArgb(255, 255, 0, 0), OnSelectColorChanged));
+
+    public static readonly DependencyProperty ColorOpacityEnabledProperty =
+        DependencyProperty.Register(nameof(ColorOpacityEnabled), typeof(bool), typeof(ColorPicker), new PropertyMetadata(false, OnColorOpacityEnabledChanged));
+
+    public static readonly DependencyProperty ColorOpacityProperty =
+        DependencyProperty.Register(nameof(ColorOpacity), typeof(byte), typeof(ColorPicker), new PropertyMetadata((byte)255, OnColorOpacityChanged));
 
     private static readonly DependencyProperty HColorProperty =
         DependencyProperty.Register(nameof(HColor), typeof(Color), typeof(ColorPicker), new PropertyMetadata(Color.FromArgb(255, 255, 0, 0)));
 
-    public static readonly DependencyProperty SelectColorProperty =
-        DependencyProperty.Register(nameof(SelectColor), typeof(Color), typeof(ColorPicker), new PropertyMetadata(Color.FromArgb(255, 255, 0, 0), OnSelectColorChanged));
+    private static readonly DependencyProperty OColorProperty =
+        DependencyProperty.Register(nameof(OColor), typeof(Color), typeof(ColorPicker), new PropertyMetadata(Color.FromArgb(255, 255, 0, 0)));
+
+    public Color SelectColor
+    {
+        get => (Color)GetValue(SelectColorProperty);
+        set => SetValue(SelectColorProperty, value);
+    }
+
+    public bool ColorOpacityEnabled
+    {
+        get => (bool)GetValue(ColorOpacityEnabledProperty);
+        set => SetValue(ColorOpacityEnabledProperty, value);
+    }
+
+    public byte ColorOpacity
+    {
+        get => (byte)GetValue(ColorOpacityProperty);
+        set => SetValue(ColorOpacityProperty, value);
+    }
 
     private Color HColor
     {
@@ -34,11 +64,12 @@ public partial class ColorPicker : UserControl
         set => SetValue(HColorProperty, value);
     }
 
-    public Color SelectColor
+    private Color OColor
     {
-        get => (Color)GetValue(SelectColorProperty);
-        set => SetValue(SelectColorProperty, value);
+        get => (Color)GetValue(OColorProperty);
+        set => SetValue(OColorProperty, value);
     }
+
 
     private static void OnSelectColorChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
     {
@@ -68,40 +99,44 @@ public partial class ColorPicker : UserControl
         }
     }
 
+    private static void OnColorOpacityEnabledChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+    {
+        if (sender is ColorPicker colorPicker)
+        {
+            if (colorPicker.ColorOpacityEnabled)
+            {
+                colorPicker.OGrid.Height = 40;
+                colorPicker.OGrid.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                colorPicker.OGrid.Height = 6;
+                colorPicker.OGrid.Visibility = Visibility.Hidden;
+            }
+        }
+    }
+
+    private static void OnColorOpacityChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+    {
+        if (sender is ColorPicker colorPicker)
+        {
+            if (colorPicker.oPositionH == null)
+            {
+                Canvas.SetLeft(colorPicker.O, NormolizePosition(colorPicker.ColorOpacity * oH / 255.0, 0, oH));
+                colorPicker.OColor = Color.FromArgb(colorPicker.ColorOpacity, colorPicker.SelectColor.R, colorPicker.SelectColor.G, colorPicker.SelectColor.B);
+            }
+
+            colorPicker.OText.Value = colorPicker.ColorOpacity;
+
+            colorPicker.SelectOpacityColorChanged?.Invoke(colorPicker, colorPicker.OColor);
+        }
+    }
+
     public ColorPicker()
     {
         InitializeComponent();
         SelectColor = Color.FromRgb(255, 0, 0);
-    }
-
-    private void OnHMouseDown(object sender, MouseButtonEventArgs e)
-    {
-        HThumb.RaiseEvent(e);
-    }
-
-    public double? hPositionH = null;
-    private void OnHThumbDragStarted(object sender, DragStartedEventArgs e)
-    {
-        hPositionH = e.HorizontalOffset - 15;
-
-        Canvas.SetLeft(H, NormolizePosition(hPositionH.Value, 0, hH));
-        UpdateColor();
-
-        Keyboard.ClearFocus();
-    }
-
-    private void OnHThumbDragDelta(object sender, DragDeltaEventArgs e)
-    {
-        if (hPositionH != null)
-        {
-            Canvas.SetLeft(H, NormolizePosition(hPositionH.Value + e.HorizontalChange, 0, hH));
-            UpdateColor();
-        }
-    }
-
-    private void OnHThumbDragCompleted(object sender, DragCompletedEventArgs e)
-    {
-        hPositionH = null;
+        ColorOpacity = 255;
     }
 
     private void OnSVMouseDown(object sender, MouseButtonEventArgs e)
@@ -139,6 +174,66 @@ public partial class ColorPicker : UserControl
         svPositionH = null;
     }
 
+    private void OnHMouseDown(object sender, MouseButtonEventArgs e)
+    {
+        HThumb.RaiseEvent(e);
+    }
+
+    public double? hPositionH = null;
+    private void OnHThumbDragStarted(object sender, DragStartedEventArgs e)
+    {
+        hPositionH = e.HorizontalOffset - 15;
+
+        Canvas.SetLeft(H, NormolizePosition(hPositionH.Value, 0, hH));
+        UpdateColor();
+
+        Keyboard.ClearFocus();
+    }
+
+    private void OnHThumbDragDelta(object sender, DragDeltaEventArgs e)
+    {
+        if (hPositionH != null)
+        {
+            Canvas.SetLeft(H, NormolizePosition(hPositionH.Value + e.HorizontalChange, 0, hH));
+            UpdateColor();
+        }
+    }
+
+    private void OnHThumbDragCompleted(object sender, DragCompletedEventArgs e)
+    {
+        hPositionH = null;
+    }
+
+    private void OnOMouseDown(object sender, MouseButtonEventArgs e)
+    {
+        OThumb.RaiseEvent(e);
+    }
+
+    public double? oPositionH = null;
+    private void OnOThumbDragStarted(object sender, DragStartedEventArgs e)
+    {
+        oPositionH = e.HorizontalOffset - 15;
+
+        Canvas.SetLeft(O, NormolizePosition(oPositionH.Value, 0, oH));
+        UpdateColor();
+
+        Keyboard.ClearFocus();
+    }
+
+    private void OnOThumbDragDelta(object sender, DragDeltaEventArgs e)
+    {
+        if (oPositionH != null)
+        {
+            Canvas.SetLeft(O, NormolizePosition(oPositionH.Value + e.HorizontalChange, 0, oH));
+            UpdateColor();
+        }
+    }
+
+    private void OnOThumbDragCompleted(object sender, DragCompletedEventArgs e)
+    {
+        oPositionH = null;
+    }
+
     private void OnRValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args)
     {
         var value = (byte)args.NewValue;
@@ -169,25 +264,38 @@ public partial class ColorPicker : UserControl
             SelectColor = Color.FromRgb(SelectColor.R, SelectColor.G, value);
     }
 
+    private void OnOValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args)
+    {
+        var value = (byte)args.NewValue;
+        if (double.IsNaN(args.NewValue))
+            sender.Value = value = 0;
+
+        if (ColorOpacity != value)
+            ColorOpacity = value;
+    }
+
     private void UpdateColor()
     {
         var h = Canvas.GetLeft(H) * 360.0 / hH;
         var s = (Canvas.GetLeft(SV) - svAddH) * 100.0 / svH / 100.0;
         var v = (100.0 - Canvas.GetTop(SV) * 100.0 / svV) / 100.0;
 
-        HColor = ColorFromHSV(h, 1, 1);
         SelectColor = ColorFromHSV(h, s, v);
+        HColor = ColorFromHSV(h, 1, 1);
+
+        ColorOpacity = Convert.ToByte(Canvas.GetLeft(O) * 255.0 / oH);
+        OColor = Color.FromArgb(ColorOpacity, SelectColor.R, SelectColor.G, SelectColor.B);
     }
 
-    private static double NormolizePosition(double top, double min, double max)
+    private static double NormolizePosition(double value, double min, double max)
     {
-        if (top < min)
-            top = min;
+        if (value < min)
+            value = min;
 
-        if (top > max)
-            top = max;
+        if (value > max)
+            value = max;
 
-        return Math.Round(top);
+        return Math.Round(value);
     }
 
     private static void ColorToHSV(DColor color, out double hue, out double saturation, out double value)

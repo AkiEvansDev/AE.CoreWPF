@@ -18,8 +18,8 @@
             <RowDefinition Height="115"/>
             <RowDefinition Height="8"/>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="12"/>
-            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <ContentControl Visibility="Collapsed" Content="{StaticResource ProxyElement}"/>
         <Thumb
@@ -150,6 +150,98 @@
             </ui:ThemeShadowChrome>
         </Canvas>
         <Grid
+            x:Name="OGrid"
+            Grid.Row="3"
+            Height="12"
+            Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="16"/>
+                <ColumnDefinition Width="72"/>
+                <ColumnDefinition Width="6"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock 
+                Grid.RowSpan="3"
+                Grid.Column="0" 
+                VerticalAlignment="Center"
+                Text="A:"/>
+            <ui:NumberBox 
+                x:Name="OText"
+                Grid.RowSpan="3"
+                Grid.Column="1"
+                VerticalAlignment="Center"
+                Value="255"
+                Minimum="0"
+                Maximum="255"
+                SpinButtonPlacementMode="Hidden" 
+                FocusVisualStyle="{x:Null}"
+                ValueChanged="OnOValueChanged"/>
+            <Thumb
+                x:Name="OThumb"
+                Grid.Row="1"
+                Grid.Column="3"
+                Margin="0 -5"
+                DragStarted="OnOThumbDragStarted"
+                DragDelta="OnOThumbDragDelta"
+                DragCompleted="OnOThumbDragCompleted">
+                <Thumb.Template>
+                    <ControlTemplate>
+                        <Grid 
+                            Background="Transparent">
+                            <Border
+                                Width="167" 
+                                Height="14"
+                                BorderThickness="1" 
+                                CornerRadius="6">
+                                <Border.BorderBrush>
+                                    <!--<SolidColorBrush Color="White"/>-->
+                                    <SolidColorBrush Color="{DynamicResource SystemChromeWhiteColor}" Opacity="0.1"/>
+                                </Border.BorderBrush>
+                                <Canvas Width="165" Height="12">
+                                    <Canvas.Background>
+                                        <LinearGradientBrush StartPoint="0 0" EndPoint="1 1">
+                                            <GradientStop Offset="0" Color="#00000000" />
+                                            <GradientStop Offset="1" Color="{Binding DataContext.SelectColor, Source={StaticResource ProxyElement}}" />
+                                        </LinearGradientBrush>
+                                    </Canvas.Background>
+                                    <Canvas.Clip>
+                                        <RectangleGeometry Rect="0 0 165 12" RadiusX="6" RadiusY="6" />
+                                    </Canvas.Clip>
+                                </Canvas>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Thumb.Template>
+            </Thumb>
+            <Canvas
+                x:Name="OCanvas"
+                Grid.Column="3">
+                <ui:ThemeShadowChrome
+                    x:Name="O"
+                    Canvas.Top="10"
+                    Canvas.Left="165"
+                    Width="20"
+                    Height="20"
+                    IsShadowEnabled="True"
+                    Depth="40">
+                    <Border
+                        Width="20"
+                        Height="20"
+                        CornerRadius="10"
+                        BorderThickness="2"
+                        MouseDown="OnOMouseDown">
+                        <Border.Background>
+                            <SolidColorBrush Color="{Binding OColor}"/>
+                        </Border.Background>
+                        <Border.BorderBrush>
+                            <!--<SolidColorBrush Color="White"/>-->
+                            <SolidColorBrush Color="{DynamicResource SystemChromeWhiteColor}"/>
+                        </Border.BorderBrush>
+                    </Border>
+                </ui:ThemeShadowChrome>
+            </Canvas>
+        </Grid>
+        <Grid
             Grid.Row="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="16"/>
@@ -201,6 +293,5 @@
                 FocusVisualStyle="{x:Null}"
                 ValueChanged="OnBValueChanged"/>
         </Grid>
-        <TextBlock x:Name="Text" Grid.Row="1"/>
     </Grid>
 </UserControl>
