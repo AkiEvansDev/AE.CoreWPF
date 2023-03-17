@@ -4,7 +4,7 @@
     <TargetFramework>net6.0-windows7.0</TargetFramework>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <UseWPF>true</UseWPF>
-    <Version>3.1.0</Version>
+    <Version>3.2.0</Version>
 	  
     <Authors>AkiEvans</Authors>
     <Product>AE.CoreWPF</Product>
