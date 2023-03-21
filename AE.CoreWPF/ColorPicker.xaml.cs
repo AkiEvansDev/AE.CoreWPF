@@ -23,7 +23,6 @@ public partial class ColorPicker : UserControl
     public delegate void OpacityColorChangedDelegate(ColorPicker sender, Color opacityColor);
 
     public event ColorChangedDelegate SelectColorChanged;
-    public event OpacityColorChangedDelegate SelectOpacityColorChanged;
 
     public static readonly DependencyProperty SelectColorProperty =
         DependencyProperty.Register(nameof(SelectColor), typeof(Color), typeof(ColorPicker), new PropertyMetadata(Color.FromArgb(255, 255, 0, 0), OnSelectColorChanged));
@@ -31,14 +30,11 @@ public partial class ColorPicker : UserControl
     public static readonly DependencyProperty ColorOpacityEnabledProperty =
         DependencyProperty.Register(nameof(ColorOpacityEnabled), typeof(bool), typeof(ColorPicker), new PropertyMetadata(false, OnColorOpacityEnabledChanged));
 
-    public static readonly DependencyProperty ColorOpacityProperty =
-        DependencyProperty.Register(nameof(ColorOpacity), typeof(byte), typeof(ColorPicker), new PropertyMetadata((byte)255, OnColorOpacityChanged));
+    private static readonly DependencyProperty ColorProperty =
+        DependencyProperty.Register(nameof(Color), typeof(Color), typeof(ColorPicker), new PropertyMetadata(Color.FromArgb(255, 255, 0, 0)));
 
     private static readonly DependencyProperty HColorProperty =
         DependencyProperty.Register(nameof(HColor), typeof(Color), typeof(ColorPicker), new PropertyMetadata(Color.FromArgb(255, 255, 0, 0)));
-
-    private static readonly DependencyProperty OColorProperty =
-        DependencyProperty.Register(nameof(OColor), typeof(Color), typeof(ColorPicker), new PropertyMetadata(Color.FromArgb(255, 255, 0, 0)));
 
     public Color SelectColor
     {
@@ -52,10 +48,10 @@ public partial class ColorPicker : UserControl
         set => SetValue(ColorOpacityEnabledProperty, value);
     }
 
-    public byte ColorOpacity
+    private Color Color
     {
-        get => (byte)GetValue(ColorOpacityProperty);
-        set => SetValue(ColorOpacityProperty, value);
+        get => (Color)GetValue(ColorProperty);
+        set => SetValue(ColorProperty, value);
     }
 
     private Color HColor
@@ -63,13 +59,6 @@ public partial class ColorPicker : UserControl
         get => (Color)GetValue(HColorProperty);
         set => SetValue(HColorProperty, value);
     }
-
-    private Color OColor
-    {
-        get => (Color)GetValue(OColorProperty);
-        set => SetValue(OColorProperty, value);
-    }
-
 
     private static void OnSelectColorChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
     {
@@ -91,6 +80,13 @@ public partial class ColorPicker : UserControl
                 colorPicker.HColor = ColorFromHSV(h, 1, 1);
             }
 
+            if (colorPicker.oPositionH == null)
+            {
+                Canvas.SetLeft(colorPicker.O, NormolizePosition(colorPicker.SelectColor.A * oH / 255.0, 0, oH));
+                colorPicker.Color = Color.FromArgb(255, colorPicker.SelectColor.R, colorPicker.SelectColor.G, colorPicker.SelectColor.B);
+            }
+
+            colorPicker.OText.Value = colorPicker.SelectColor.A;
             colorPicker.R.Value = colorPicker.SelectColor.R;
             colorPicker.G.Value = colorPicker.SelectColor.G;
             colorPicker.B.Value = colorPicker.SelectColor.B;
@@ -112,23 +108,9 @@ public partial class ColorPicker : UserControl
             {
                 colorPicker.OGrid.Height = 6;
                 colorPicker.OGrid.Visibility = Visibility.Hidden;
+
+                colorPicker.SelectColor = Color.FromArgb(255, colorPicker.SelectColor.R, colorPicker.SelectColor.G, colorPicker.SelectColor.B);
             }
-        }
-    }
-
-    private static void OnColorOpacityChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
-    {
-        if (sender is ColorPicker colorPicker)
-        {
-            if (colorPicker.oPositionH == null)
-            {
-                Canvas.SetLeft(colorPicker.O, NormolizePosition(colorPicker.ColorOpacity * oH / 255.0, 0, oH));
-                colorPicker.OColor = Color.FromArgb(colorPicker.ColorOpacity, colorPicker.SelectColor.R, colorPicker.SelectColor.G, colorPicker.SelectColor.B);
-            }
-
-            colorPicker.OText.Value = colorPicker.ColorOpacity;
-
-            colorPicker.SelectOpacityColorChanged?.Invoke(colorPicker, colorPicker.OColor);
         }
     }
 
@@ -137,7 +119,6 @@ public partial class ColorPicker : UserControl
         InitializeComponent();
         SelectColor = Color.FromRgb(255, 0, 0);
         ColorOpacityEnabled = false;
-        ColorOpacity = 255;
     }
 
     private void OnSVMouseDown(object sender, MouseButtonEventArgs e)
@@ -271,21 +252,21 @@ public partial class ColorPicker : UserControl
         if (double.IsNaN(args.NewValue))
             sender.Value = value = 0;
 
-        if (ColorOpacity != value)
-            ColorOpacity = value;
+        if (SelectColor.A != value)
+            SelectColor = Color.FromArgb(value, SelectColor.R, SelectColor.G, SelectColor.B);
     }
 
     private void UpdateColor()
     {
+        var a = Convert.ToByte(Canvas.GetLeft(O) * 255.0 / oH);
+
         var h = Canvas.GetLeft(H) * 360.0 / hH;
         var s = (Canvas.GetLeft(SV) - svAddH) * 100.0 / svH / 100.0;
         var v = (100.0 - Canvas.GetTop(SV) * 100.0 / svV) / 100.0;
 
-        SelectColor = ColorFromHSV(h, s, v);
+        Color = ColorFromHSV(h, s, v);
         HColor = ColorFromHSV(h, 1, 1);
-
-        ColorOpacity = Convert.ToByte(Canvas.GetLeft(O) * 255.0 / oH);
-        OColor = Color.FromArgb(ColorOpacity, SelectColor.R, SelectColor.G, SelectColor.B);
+        SelectColor = Color.FromArgb(a, Color.R, Color.G, Color.B);
     }
 
     private static double NormolizePosition(double value, double min, double max)

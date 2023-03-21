@@ -37,7 +37,7 @@
                             Orientation="Horizontal">
                             <Canvas Width="55" Height="100">
                                 <Canvas.Background>
-                                    <SolidColorBrush Color="{Binding DataContext.SelectColor, Source={StaticResource ProxyElement}}"/>
+                                    <SolidColorBrush Color="{Binding DataContext.Color, Source={StaticResource ProxyElement}}"/>
                                 </Canvas.Background>
                                 <Canvas.Clip>
                                     <RectangleGeometry Rect="0 0 67 100" RadiusX="12" RadiusY="12" />
@@ -84,7 +84,7 @@
                     BorderThickness="2"
                     MouseDown="OnSVMouseDown">
                     <Border.Background>
-                        <SolidColorBrush Color="{Binding DataContext.SelectColor, Source={StaticResource ProxyElement}}"/>
+                        <SolidColorBrush Color="{Binding DataContext.Color, Source={StaticResource ProxyElement}}"/>
                     </Border.Background>
                     <Border.BorderBrush>
                         <!--<SolidColorBrush Color="White"/>-->
@@ -201,7 +201,7 @@
                                     <Canvas.Background>
                                         <LinearGradientBrush StartPoint="0 0" EndPoint="1 1">
                                             <GradientStop Offset="0" Color="#00000000" />
-                                            <GradientStop Offset="1" Color="{Binding DataContext.SelectColor, Source={StaticResource ProxyElement}}" />
+                                            <GradientStop Offset="1" Color="{Binding DataContext.Color, Source={StaticResource ProxyElement}}" />
                                         </LinearGradientBrush>
                                     </Canvas.Background>
                                     <Canvas.Clip>
@@ -231,7 +231,7 @@
                         BorderThickness="2"
                         MouseDown="OnOMouseDown">
                         <Border.Background>
-                            <SolidColorBrush Color="{Binding OColor}"/>
+                            <SolidColorBrush Color="{Binding DataContext.SelectColor, Source={StaticResource ProxyElement}}"/>
                         </Border.Background>
                         <Border.BorderBrush>
                             <!--<SolidColorBrush Color="White"/>-->
