@@ -5,7 +5,7 @@
     xmlns:local="clr-namespace:ModernWpf.Controls"
     xmlns:primitives="clr-namespace:ModernWpf.Controls.Primitives">
 
-    <Thickness x:Key="CalendarDatePickerTopHeaderMargin">0,0,0,8</Thickness>
+    <Thickness x:Key="CalendarDatePickerTopHeaderMargin">0,0,0,4</Thickness>
 
     <Style x:Key="DefaultDatePickerTextBoxStyle" TargetType="DatePickerTextBox">
         <Setter Property="OverridesDefaultStyle" Value="True" />
