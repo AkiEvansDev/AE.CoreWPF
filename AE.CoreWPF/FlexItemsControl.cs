@@ -71,6 +71,8 @@ public class FlexItemsControl : ItemsControl
             var element = GetFrameworkItem(e.NewItems.Cast<object>().Last());
             HandleUpdate(element);
         }
+        else if (e.Action == NotifyCollectionChangedAction.Remove)
+            Update();
     }
 
     protected override void OnChildDesiredSizeChanged(UIElement child)
