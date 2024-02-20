@@ -48,6 +48,8 @@ namespace ModernWpf.Controls
 
         private static readonly ResourceAccessor ResourceAccessor = new ResourceAccessor(typeof(NumberBox));
 
+        public TextBox TextElement => m_textBox;
+
         static NumberBox()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(NumberBox), new FrameworkPropertyMetadata(typeof(NumberBox)));
