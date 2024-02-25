@@ -48,7 +48,7 @@ namespace ModernWpf.Controls
 
         private static readonly ResourceAccessor ResourceAccessor = new ResourceAccessor(typeof(NumberBox));
 
-        public TextBox TextElement => m_textBox;
+        public TextBox TextBoxElement => m_textBox;
 
         static NumberBox()
         {

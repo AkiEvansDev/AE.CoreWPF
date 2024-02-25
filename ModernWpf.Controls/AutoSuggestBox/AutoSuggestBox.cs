@@ -26,7 +26,9 @@ namespace ModernWpf.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(AutoSuggestBox), new FrameworkPropertyMetadata(typeof(AutoSuggestBox)));
         }
 
-        public AutoSuggestBox()
+		public TextBox TextBoxElement => m_textBox;
+
+		public AutoSuggestBox()
         {
             m_delayTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(150) };
             m_delayTimer.Tick += OnDelayTimerTick;
