@@ -27,6 +27,9 @@ namespace ModernWpf.Controls
         }
 
 		public TextBox TextBoxElement => m_textBox;
+		public Button QueryButtonElement => m_queryButton;
+		public Popup SuggestionsPopupElement => m_suggestionsPopup;
+		public AutoSuggestBoxListView SuggestionsListElement => m_suggestionsList;
 
 		public AutoSuggestBox()
         {

@@ -23,7 +23,10 @@ namespace ModernWpf.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(SplitButton), new FrameworkPropertyMetadata(typeof(SplitButton)));
         }
 
-        public SplitButton()
+		public Button PrimaryButtonElement => m_primaryButton;
+		public Button SecondaryButtonElemnt => m_secondaryButton;
+
+		public SplitButton()
         {
             KeyDown += OnSplitButtonKeyDown;
             KeyUp += OnSplitButtonKeyUp;
