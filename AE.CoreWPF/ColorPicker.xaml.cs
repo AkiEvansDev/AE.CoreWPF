@@ -123,6 +123,7 @@ public partial class ColorPicker : UserControl
         SelectColor = Color.FromRgb(255, 0, 0);
         ColorOpacityEnabled = false;
 
+		OText.Loaded += ColorBoxLoaded;
 		R.Loaded += ColorBoxLoaded;
 		G.Loaded += ColorBoxLoaded;
 		B.Loaded += ColorBoxLoaded;
