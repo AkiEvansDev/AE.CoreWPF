@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -6,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 
 using ModernWpf.Controls;
+using ModernWpf.Controls.Primitives;
 
 using DColor = System.Drawing.Color;
 
@@ -117,11 +119,62 @@ public partial class ColorPicker : UserControl
     public ColorPicker()
     {
         InitializeComponent();
+        
         SelectColor = Color.FromRgb(255, 0, 0);
         ColorOpacityEnabled = false;
-    }
 
-    private void OnSVMouseDown(object sender, MouseButtonEventArgs e)
+		R.Loaded += ColorBoxLoaded;
+		G.Loaded += ColorBoxLoaded;
+		B.Loaded += ColorBoxLoaded;
+	}
+
+	private void ColorBoxLoaded(object sender, RoutedEventArgs e)
+	{
+        if (sender is NumberBox element)
+        {
+			if (element.Tag is bool loaded && loaded == true)
+				return;
+
+            element.Foreground = (Brush)Application.Current.Resources["TextControlForeground"];
+            element.BorderThickness = new Thickness(0, 0, 0, 1);
+			element.Tag = true;
+
+			ControlHelper.SetCornerRadius(element, new CornerRadius(0));
+
+			var regex = new Regex("[^0-9]+");
+
+			element.TextBoxElement.Foreground = element.Foreground;
+			element.TextBoxElement.BorderThickness = element.BorderThickness;
+
+			element.TextBoxElement.Resources.Add("TextControlBorderThemeThicknessFocused", element.BorderThickness);
+
+			TextBoxHelper.SetIsDeleteButtonVisible(element.TextBoxElement, false);
+
+			DataObject.AddPastingHandler(element.TextBoxElement, (s, e) =>
+			{
+				if (e.DataObject.GetDataPresent(typeof(string)))
+				{
+					if (regex.IsMatch((string)e.DataObject.GetData(typeof(string))))
+						e.CancelCommand();
+				}
+				else
+					e.CancelCommand();
+			});
+
+			element.TextBoxElement.PreviewTextInput += (s, e) =>
+			{
+				e.Handled = regex.IsMatch(e.Text);
+			};
+
+			element.TextBoxElement.LostFocus += (s, e) =>
+			{
+				if (string.IsNullOrEmpty(element.TextBoxElement.Text))
+					element.TextBoxElement.Text = "0";
+			};
+		}
+	}
+
+	private void OnSVMouseDown(object sender, MouseButtonEventArgs e)
     {
         SVThumb.RaiseEvent(e);
     }

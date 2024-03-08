@@ -163,6 +163,7 @@
             <TextBlock 
                 Grid.RowSpan="3"
                 Grid.Column="0" 
+                Foreground="{DynamicResource TextControlForeground}"
                 VerticalAlignment="Center"
                 Text="A:"/>
             <ui:NumberBox 
@@ -255,11 +256,13 @@
             </Grid.ColumnDefinitions>
             <TextBlock 
                 Grid.Column="0" 
+                Foreground="{DynamicResource TextControlForeground}"
                 Text="R:" 
                 VerticalAlignment="Center"/>
             <ui:NumberBox 
                 x:Name="R"
                 Grid.Column="1"
+                BorderThickness="0,0,0,1"
                 Value="255"
                 Minimum="0"
                 Maximum="255"
@@ -268,11 +271,13 @@
                 ValueChanged="OnRValueChanged"/>
             <TextBlock 
                 Grid.Column="3" 
+                Foreground="{DynamicResource TextControlForeground}"
                 Text="G:" 
                 VerticalAlignment="Center"/>
             <ui:NumberBox 
                 x:Name="G"
                 Grid.Column="4"
+                Foreground="{DynamicResource TextControlForeground}"
                 Value="0"
                 Minimum="0"
                 Maximum="255"
@@ -281,11 +286,13 @@
                 ValueChanged="OnGValueChanged"/>
             <TextBlock 
                 Grid.Column="6" 
+                Foreground="{DynamicResource TextControlForeground}"
                 Text="B:" 
                 VerticalAlignment="Center"/>
             <ui:NumberBox 
                 x:Name="B"
                 Grid.Column="7"
+                Foreground="{DynamicResource TextControlForeground}"
                 Value="0"
                 Minimum="0"
                 Maximum="255"
