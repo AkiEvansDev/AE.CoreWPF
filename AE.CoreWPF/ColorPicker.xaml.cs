@@ -136,17 +136,21 @@ public partial class ColorPicker : UserControl
 			if (element.Tag is bool loaded && loaded == true)
 				return;
 
-            element.Foreground = (Brush)Application.Current.Resources["TextControlForeground"];
-            element.BorderThickness = new Thickness(0, 0, 0, 1);
+			element.Background = new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+			element.Foreground = (Brush)Application.Current.Resources["TextControlForeground"];
+			element.BorderThickness = new Thickness(0, 0, 0, 1);
 			element.Tag = true;
 
 			ControlHelper.SetCornerRadius(element, new CornerRadius(0));
 
 			var regex = new Regex("[^0-9]+");
 
+			element.TextBoxElement.Background = element.Background;
 			element.TextBoxElement.Foreground = element.Foreground;
 			element.TextBoxElement.BorderThickness = element.BorderThickness;
 
+			element.TextBoxElement.Resources.Add("TextControlBackgroundFocused", element.Background);
+			element.TextBoxElement.Resources.Add("TextControlBackgroundPointerOver", element.Background);
 			element.TextBoxElement.Resources.Add("TextControlBorderThemeThicknessFocused", element.BorderThickness);
 
 			TextBoxHelper.SetIsDeleteButtonVisible(element.TextBoxElement, false);
