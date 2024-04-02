@@ -4,12 +4,15 @@
     <TargetFramework>net6.0-windows7.0</TargetFramework>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <UseWPF>true</UseWPF>
-    <Version>3.2.9</Version>
 	  
+    <Version>3.3.0</Version>
+	<Title>AE.CoreWPF</Title>
+	<Description>AE.CoreWPF</Description>
     <Authors>AkiEvans</Authors>
-    <Product>AE.CoreWPF</Product>
 	<PackageTags>AE.CoreWPF;</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<RepositoryType>git</RepositoryType>
+	<RepositoryUrl>https://github.com/AkiEvansDev/AE.CoreWPF</RepositoryUrl>
     <PackageProjectUrl>https://github.com/AkiEvansDev/AE.CoreWPF</PackageProjectUrl>
 	<NuspecFile>$(MSBuildThisFileDirectory)AE.CoreWPF.nuspec</NuspecFile>
   </PropertyGroup>
