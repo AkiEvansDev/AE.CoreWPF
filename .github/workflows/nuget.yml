@@ -22,7 +22,9 @@ jobs:
     - name: Test
       run: dotnet test -c Release --no-build
     - name: Pack nugets
-      run: dotnet pack -c Release --no-build AE.CoreWPF/AE.CoreWPF.csproj --output .
+      run: | 
+        dotnet pack -c Release --no-build AE.CoreWPF/AE.CoreWPF.csproj --output .
+        dotnet pack -c Release --no-build AE.CoreWPF.Controls/AE.CoreWPF.Controls.csproj --output .
     - name: Add github source
       run: dotnet nuget add source --username AkiEvansDev --password ${{ secrets.TOKEN_GITHUB }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/AkiEvansDev/index.json"
     - name: Push to Git
