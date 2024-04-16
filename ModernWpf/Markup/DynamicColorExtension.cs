@@ -8,61 +8,61 @@ using System.Windows.Media;
 
 namespace ModernWpf.Markup
 {
-    [TypeConverter(typeof(DynamicColorExtensionConverter))]
-    public class DynamicColorExtension : DynamicResourceExtension
-    {
-        public DynamicColorExtension()
-        {
-        }
+	[TypeConverter(typeof(DynamicColorExtensionConverter))]
+	public class DynamicColorExtension : DynamicResourceExtension
+	{
+		public DynamicColorExtension()
+		{
+		}
 
-        public DynamicColorExtension(object resourceKey) : base(resourceKey)
-        {
-        }
+		public DynamicColorExtension(object resourceKey) : base(resourceKey)
+		{
+		}
 
-        public override object ProvideValue(IServiceProvider serviceProvider)
-        {
-            object value = base.ProvideValue(serviceProvider);
+		public override object ProvideValue(IServiceProvider serviceProvider)
+		{
+			object value = base.ProvideValue(serviceProvider);
 
-            if (serviceProvider?.GetService(typeof(IProvideValueTarget)) is IProvideValueTarget provideValueTarget)
-            {
-                if (provideValueTarget.TargetObject is SolidColorBrush solidColorBrush)
-                {
-                    ThemeResourceHelper.SetColorKey(solidColorBrush, ResourceKey);
-                }
-            }
+			if (serviceProvider?.GetService(typeof(IProvideValueTarget)) is IProvideValueTarget provideValueTarget)
+			{
+				if (provideValueTarget.TargetObject is SolidColorBrush solidColorBrush)
+				{
+					ThemeResourceHelper.SetColorKey(solidColorBrush, ResourceKey);
+				}
+			}
 
-            return value;
-        }
-    }
+			return value;
+		}
+	}
 
-    public class DynamicColorExtensionConverter : TypeConverter
-    {
-        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
-        {
-            if (destinationType == typeof(InstanceDescriptor))
-            {
-                return true;
-            }
-            return base.CanConvertTo(context, destinationType);
-        }
+	public class DynamicColorExtensionConverter : TypeConverter
+	{
+		public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+		{
+			if (destinationType == typeof(InstanceDescriptor))
+			{
+				return true;
+			}
+			return base.CanConvertTo(context, destinationType);
+		}
 
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
-        {
-            if (destinationType == typeof(InstanceDescriptor))
-            {
-                if (value == null)
-                    throw new ArgumentNullException(nameof(value));
+		public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+		{
+			if (destinationType == typeof(InstanceDescriptor))
+			{
+				if (value == null)
+					throw new ArgumentNullException(nameof(value));
 
-                DynamicColorExtension dynamicResource = value as DynamicColorExtension;
+				DynamicColorExtension dynamicResource = value as DynamicColorExtension;
 
-                if (dynamicResource == null)
+				if (dynamicResource == null)
 
-                    throw new ArgumentException($"{value} must be of type {nameof(DynamicColorExtension)}", nameof(value));
+					throw new ArgumentException($"{value} must be of type {nameof(DynamicColorExtension)}", nameof(value));
 
-                return new InstanceDescriptor(typeof(DynamicColorExtension).GetConstructor(new Type[] { typeof(object) }),
-                    new object[] { dynamicResource.ResourceKey });
-            }
-            return base.ConvertTo(context, culture, value, destinationType);
-        }
-    }
+				return new InstanceDescriptor(typeof(DynamicColorExtension).GetConstructor(new Type[] { typeof(object) }),
+					new object[] { dynamicResource.ResourceKey });
+			}
+			return base.ConvertTo(context, culture, value, destinationType);
+		}
+	}
 }

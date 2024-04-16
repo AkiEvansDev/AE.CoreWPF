@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="AE.CoreWPF.ColorPicker"
+    x:Class="AE.CoreWPF.Controls.ColorPicker"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -35,22 +35,22 @@
                             VerticalAlignment="Center"
                             HorizontalAlignment="Center"
                             Orientation="Horizontal">
-                            <Canvas Width="55" Height="100">
+                            <Canvas Width="55" Height="110">
                                 <Canvas.Background>
                                     <SolidColorBrush Color="{Binding DataContext.Color, Source={StaticResource ProxyElement}}"/>
                                 </Canvas.Background>
                                 <Canvas.Clip>
-                                    <RectangleGeometry Rect="0 0 67 100" RadiusX="12" RadiusY="12" />
+                                    <RectangleGeometry Rect="0 0 67 110" RadiusX="4" RadiusY="4" />
                                 </Canvas.Clip>
                             </Canvas>
-                            <Canvas Width="200" Height="100">
+                            <Canvas Width="200" Height="110">
                                 <Canvas.Background>
                                     <LinearGradientBrush StartPoint="0 0.5" EndPoint="1 0.5">
                                         <GradientStop Offset="0" Color="White"  />
                                         <GradientStop Offset="1" Color="{Binding DataContext.HColor, Source={StaticResource ProxyElement}}" />
                                     </LinearGradientBrush>
                                 </Canvas.Background>
-                                <Canvas Width="200" Height="100">
+                                <Canvas Width="200" Height="110">
                                     <Canvas.Background>
                                         <LinearGradientBrush StartPoint="0.5 0" EndPoint="0.5 1">
                                             <GradientStop Offset="0" Color="Transparent" />
@@ -59,7 +59,7 @@
                                     </Canvas.Background>
                                 </Canvas>
                                 <Canvas.Clip>
-                                    <RectangleGeometry Rect="-12 0 212 100" RadiusX="12" RadiusY="12" />
+                                    <RectangleGeometry Rect="-12 0 212 110" RadiusX="4" RadiusY="4" />
                                 </Canvas.Clip>
                             </Canvas>
                         </ui:SimpleStackPanel>
@@ -117,7 +117,7 @@
                                 </LinearGradientBrush>
                             </Canvas.Background>
                             <Canvas.Clip>
-                                <RectangleGeometry Rect="0 0 255 12" RadiusX="6" RadiusY="6" />
+                                <RectangleGeometry Rect="0 0 255 12" RadiusX="4" RadiusY="4" />
                             </Canvas.Clip>
                         </Canvas>
                     </Grid>
@@ -193,7 +193,7 @@
                                 Width="167" 
                                 Height="14"
                                 BorderThickness="1" 
-                                CornerRadius="6">
+                                CornerRadius="4">
                                 <Border.BorderBrush>
                                     <!--<SolidColorBrush Color="White"/>-->
                                     <SolidColorBrush Color="{DynamicResource SystemChromeWhiteColor}" Opacity="0.1"/>
@@ -206,7 +206,7 @@
                                         </LinearGradientBrush>
                                     </Canvas.Background>
                                     <Canvas.Clip>
-                                        <RectangleGeometry Rect="0 0 165 12" RadiusX="6" RadiusY="6" />
+                                        <RectangleGeometry Rect="0 0 165 12" RadiusX="4" RadiusY="4" />
                                     </Canvas.Clip>
                                 </Canvas>
                             </Border>

@@ -8,7 +8,7 @@ using ModernWpf.Controls;
 using SDColor = System.Drawing.Color;
 using SWMColor = System.Windows.Media.Color;
 
-namespace AE.CoreWPF.Controls;
+namespace AE.CoreWPF;
 
 public static partial class DisplayHelper
 {
@@ -30,6 +30,13 @@ public static partial class DisplayHelper
 		Resource = resourceManager;
 
 		ThemeManager.Current.AccentColor = Settings.Accent;
+		
+		application.Resources.Add("SystemControlPageBackgroundAltHighBrush", Settings.SecondaryBackgroundBrush);
+		application.Resources.Add("SystemControlPageTextBaseHighBrush", Settings.ForegroundBrush);
+		application.Resources.Add("WindowBorder", Settings.StrokeBrush);
+
+		application.Resources.Add("ContentControlThemeFontFamily", Settings.FontFamily);
+		application.Resources.Add("ControlContentThemeFontSize", Settings.FontSize);
 
 		#region ComboBox
 
@@ -73,7 +80,7 @@ public static partial class DisplayHelper
 		application.Resources.Add("TextControlForegroundFocused", Settings.ForegroundBrush);
 		application.Resources.Add("TextControlForegroundDisabled", Settings.TertiaryForegroundBrush);
 
-		application.Resources.Add("TextControlBorderBrush", Settings.SecondaryForegroundBrush);
+		application.Resources.Add("TextControlBorderBrush", Settings.StrokeBrush);
 		application.Resources.Add("TextControlBorderBrushPointerOver", Settings.AccentBrush);
 		application.Resources.Add("TextControlBorderBrushFocused", Settings.AccentBrush);
 		application.Resources.Add("TextControlBorderBrushDisabled", Settings.TertiaryForegroundBrush);
@@ -91,8 +98,8 @@ public static partial class DisplayHelper
 		application.Resources.Add("CheckBoxBackgroundUnchecked", Settings.TransperentBrush);
 		application.Resources.Add("CheckBoxCheckBackgroundFillUnchecked", Settings.TransperentBrush);
 		application.Resources.Add("CheckBoxForegroundUnchecked", Settings.ForegroundBrush);
-		application.Resources.Add("CheckBoxBorderBrushUnchecked", Settings.ForegroundBrush);
-		application.Resources.Add("CheckBoxCheckBackgroundStrokeUnchecked", Settings.ForegroundBrush);
+		application.Resources.Add("CheckBoxBorderBrushUnchecked", Settings.TertiaryForegroundBrush);
+		application.Resources.Add("CheckBoxCheckBackgroundStrokeUnchecked", Settings.TertiaryForegroundBrush);
 		application.Resources.Add("CheckBoxCheckGlyphForegroundUnchecked", Settings.ForegroundBrush);
 
 		application.Resources.Add("CheckBoxBackgroundUncheckedPointerOver", Settings.TransperentBrush);
@@ -105,15 +112,15 @@ public static partial class DisplayHelper
 		application.Resources.Add("CheckBoxBackgroundUncheckedPressed", Settings.TransperentBrush);
 		application.Resources.Add("CheckBoxCheckBackgroundFillUncheckedPressed", Settings.TransperentBrush);
 		application.Resources.Add("CheckBoxForegroundUncheckedPressed", Settings.SecondaryForegroundBrush);
-		application.Resources.Add("CheckBoxBorderBrushUncheckedPressed", Settings.SecondaryForegroundBrush);
-		application.Resources.Add("CheckBoxCheckBackgroundStrokeUncheckedPressed", Settings.SecondaryForegroundBrush);
+		application.Resources.Add("CheckBoxBorderBrushUncheckedPressed", Settings.TertiaryForegroundBrush);
+		application.Resources.Add("CheckBoxCheckBackgroundStrokeUncheckedPressed", Settings.TertiaryForegroundBrush);
 		application.Resources.Add("CheckBoxCheckGlyphForegroundUncheckedPressed", Settings.SecondaryForegroundBrush);
 
 		application.Resources.Add("CheckBoxBackgroundUncheckedDisabled", Settings.SecondaryBackgroundBrush);
 		application.Resources.Add("CheckBoxCheckBackgroundFillUncheckedDisabled", Settings.SecondaryBackgroundBrush);
 		application.Resources.Add("CheckBoxForegroundUncheckedDisabled", Settings.TertiaryForegroundBrush);
-		application.Resources.Add("CheckBoxBorderBrushUncheckedDisabled", Settings.TertiaryForegroundBrush);
-		application.Resources.Add("CheckBoxCheckBackgroundStrokeUncheckedDisabled", Settings.TertiaryForegroundBrush);
+		application.Resources.Add("CheckBoxBorderBrushUncheckedDisabled", Settings.StrokeBrush);
+		application.Resources.Add("CheckBoxCheckBackgroundStrokeUncheckedDisabled", Settings.StrokeBrush);
 		application.Resources.Add("CheckBoxCheckGlyphForegroundUncheckedDisabled", Settings.TertiaryForegroundBrush);
 
 		application.Resources.Add("CheckBoxForegroundChecked", Settings.BackgroundBrush);
@@ -124,7 +131,6 @@ public static partial class DisplayHelper
 
 		application.Resources.Add("CheckBoxForegroundCheckedPressed", Settings.SecondaryBackgroundBrush);
 		application.Resources.Add("CheckBoxCheckGlyphForegroundCheckedPressed", Settings.SecondaryBackgroundBrush);
-
 
 		#endregion
 		#region TabControl
@@ -137,8 +143,8 @@ public static partial class DisplayHelper
 
 		application.Resources.Add("TabViewItemSeparator", Settings.TransperentBrush);
 
-		application.Resources.Add("TabViewItemHeaderBackground", Settings.TertiaryBackground.WithAlpha(100).ToBrush());
-		application.Resources.Add("TabViewItemHeaderBackgroundPointerOver", Settings.TertiaryBackground.WithAlpha(200).ToBrush());
+		application.Resources.Add("TabViewItemHeaderBackground", Settings.TertiaryBackground.WithAlpha(Settings.ColorOpacity2).ToBrush());
+		application.Resources.Add("TabViewItemHeaderBackgroundPointerOver", Settings.SelectBackgroundBrush);
 		application.Resources.Add("TabViewItemHeaderBackgroundSelected", Settings.TertiaryBackgroundBrush);
 
 		#endregion
@@ -150,14 +156,17 @@ public static partial class DisplayHelper
 		application.Resources.Add("ButtonForegroundDisabled", Settings.TertiaryForegroundBrush);
 
 		application.Resources.Add("ButtonBackground", Settings.TransperentBrush);
-		application.Resources.Add("ButtonBackgroundPointerOver", Settings.TertiaryBackground.WithAlpha(200).ToBrush());
-		application.Resources.Add("ButtonBackgroundPressed", Settings.TertiaryBackground.WithAlpha(100).ToBrush());
+		application.Resources.Add("ButtonBackgroundPointerOver", Settings.SelectBackgroundBrush);
+		application.Resources.Add("ButtonBackgroundPressed", Settings.TertiaryBackground.WithAlpha(Settings.ColorOpacity2).ToBrush());
 		application.Resources.Add("ButtonBackgroundDisabled", Settings.TertiaryBackground);
 
 		application.Resources.Add("ButtonBorderBrush", Settings.TransperentBrush);
-		application.Resources.Add("ButtonBorderBrushPointerOver", Settings.TertiaryBackground.WithAlpha(200).ToBrush());
-		application.Resources.Add("ButtonBorderBrushPressed", Settings.TertiaryBackground.WithAlpha(100).ToBrush());
+		application.Resources.Add("ButtonBorderBrushPointerOver", Settings.SelectBackgroundBrush);
+		application.Resources.Add("ButtonBorderBrushPressed", Settings.TertiaryBackground.WithAlpha(Settings.ColorOpacity2).ToBrush());
 		application.Resources.Add("ButtonBorderBrushDisabled", Settings.TertiaryForegroundBrush);
+
+		application.Resources.Add("CloseButtonBackgroundPointerOver", Settings.ErrorColorBrush);
+		application.Resources.Add("CloseButtonBackgroundPressed", Settings.ErrorColor.WithAlpha(Settings.ColorOpacity2).ToBrush());
 
 		#endregion
 		#region Scroll
@@ -170,9 +179,9 @@ public static partial class DisplayHelper
 		application.Resources.Add("ScrollBarTrackFill", Settings.SecondaryBackgroundBrush);
 		application.Resources.Add("ScrollBarBackgroundPointerOver", Settings.SecondaryBackgroundBrush);
 		application.Resources.Add("ScrollBarTrackFillPointerOver", Settings.SecondaryBackgroundBrush);
-		application.Resources.Add("ScrollBarTrackStroke", Settings.SelectStrokeBrush);
-		application.Resources.Add("ScrollBarBorderBrushPointerOver", Settings.SelectStrokeBrush);
-		application.Resources.Add("ScrollBarTrackStrokePointerOver", Settings.SelectStrokeBrush);
+		application.Resources.Add("ScrollBarTrackStroke", Settings.StrokeBrush);
+		application.Resources.Add("ScrollBarBorderBrushPointerOver", Settings.StrokeBrush);
+		application.Resources.Add("ScrollBarTrackStrokePointerOver", Settings.StrokeBrush);
 
 		application.Resources.Add("ScrollBarPanningThumbBackground", Settings.TertiaryBackgroundBrush);
 		application.Resources.Add("ScrollBarThumbBorderBrush", Settings.TertiaryBackgroundBrush);
@@ -185,9 +194,9 @@ public static partial class DisplayHelper
 		application.Resources.Add("MenuFlyoutThemeMinHeight", 0.0);
 		application.Resources.Add("MenuFlyoutPresenterThemePadding", new Thickness(Settings.MinSpace));
 		application.Resources.Add("MenuFlyoutSeparatorThemePadding", new Thickness(Settings.Space, Settings.MinSpace, Settings.Space, Settings.MinSpace));
-		application.Resources.Add("OverlayCornerRadius", new CornerRadius(0));
+		application.Resources.Add("OverlayCornerRadius", new CornerRadius(Settings.MinRound));
 
-		application.Resources.Add("MenuFlyoutSeparatorBackground", Settings.SelectStrokeBrush);
+		application.Resources.Add("MenuFlyoutSeparatorBackground", Settings.StrokeBrush);
 		application.Resources.Add("MenuFlyoutPresenterBackground", Settings.TertiaryBackgroundBrush);
 		application.Resources.Add("MenuFlyoutPresenterBorderBrush", Settings.TertiaryBackgroundBrush);
 
@@ -201,21 +210,21 @@ public static partial class DisplayHelper
 		#endregion
 	}
 
-	public static SWMColor? GetSymbolColor(Symbol symbol)
+	public static SWMColor GetSymbolColor(Symbol symbol)
 	{
 		return symbol switch
 		{
-			Symbol.Cancel or Symbol.Delete or Symbol.Target or Symbol.Stop => (SWMColor?)Settings.ErrorColor,
-			Symbol.Play => (SWMColor?)Settings.SuccessColor,
-			Symbol.NewFolder => (SWMColor?)Settings.WarningColor,
-			Symbol.Document => (SWMColor?)Settings.MessageColor,
-			_ => null,
+			Symbol.Delete or Symbol.Stop => Settings.ErrorColor,
+			Symbol.Play => Settings.SuccessColor,
+			Symbol.Folder or Symbol.NewFolder => Settings.WarningColor,
+			Symbol.Document => Settings.MessageColor,
+			_ => Settings.Foreground,
 		};
 	}
 
 	public static string GetText(string key, params object[] args)
 	{
-		if (Resource == null || key == null)
+		if (Resource == null || key == null || !key.StartsWith("&="))
 			return key;
 
 		var value = Resource.GetString(key);

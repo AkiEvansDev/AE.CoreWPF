@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 
 using ModernWpf.Controls;
@@ -20,8 +21,11 @@ public class TextIconButton : Button
 		}
 	}
 
-	private SymbolIcon icon;
-	private TextBlock textBlock;
+	public Visibility IconVisibility
+	{
+		get => icon.Visibility;
+		set => icon.Visibility = value;
+	}
 
 	public Symbol Symbol
 	{
@@ -35,52 +39,67 @@ public class TextIconButton : Button
 		set => textBlock.Text = value;
 	}
 
-	public TextIconButton(Symbol symbol, string text, double size, Color? color = null)
+	private Brush activeBackground;
+	public Brush ActiveBackground
+	{
+		get => activeBackground;
+		set
+		{
+			activeBackground = value;
+			RefreshState();
+		}
+	}
+
+	private Brush activeBorderBrush;
+	public Brush ActiveBorderBrush
+	{
+		get => activeBorderBrush;
+		set
+		{
+			activeBorderBrush = value;
+			RefreshState();
+		}
+	}
+
+	private SymbolIcon icon;
+	private TextBlock textBlock;
+
+	public TextIconButton(Symbol symbol, string text, double size, Color color)
 	{
 		Layout(symbol, text, size, color);
 		RefreshState();
 	}
 
-	private void Layout(Symbol symbol, string text, double size, Color? color)
+	private void Layout(Symbol symbol, string text, double size, Color color)
 	{
 		Style = (Style)Application.Current.Resources["DefaultButtonStyle"];
+
+		activeBackground = DisplayHelper.Settings.SelectBackgroundBrush;
+		activeBorderBrush = DisplayHelper.Settings.AccentBrush;
 
 		BorderBrush = DisplayHelper.Settings.TransperentBrush;
 		BorderThickness = new Thickness(DisplayHelper.Settings.MinBorder);
 
+		ControlHelper.SetCornerRadius(this, new CornerRadius(DisplayHelper.Settings.MinRound));
 
-		ControlHelper.SetCornerRadius(this, new CornerRadius(0));
+		Resources.Add("ButtonForeground", color.ToBrush());
+		Resources.Add("ButtonForegroundPointerOver", color.WithAlpha(DisplayHelper.Settings.ColorOpacity1).ToBrush());
+		Resources.Add("ButtonForegroundPressed", color.WithAlpha(DisplayHelper.Settings.ColorOpacity2).ToBrush());
 
 		var panel = new SimpleStackPanel
 		{
-			Spacing = DisplayHelper.Settings.Space,
 			Orientation = Orientation.Horizontal,
 		};
 
 		icon = new SymbolIcon(symbol)
 		{
+			Margin = new Thickness(DisplayHelper.Settings.MinSpace, 0, 0, 0),
 			LayoutTransform = new ScaleTransform(size / 35, size / 35),
-			Opacity = 0.8,
+			SnapsToDevicePixels = true,
 		};
 
-		SolidColorBrush foreground = null;
-		SolidColorBrush secondaryForeground = null;
-
-		if (color != null)
-		{
-			foreground = color.Value.ToBrush();
-			secondaryForeground = color.Value.WithAlpha(200).ToBrush();
-		}
-
-		if (foreground != null && secondaryForeground != null)
-		{
-			Resources.Add("ButtonForeground", foreground);
-			Resources.Add("ButtonForegroundPointerOver", secondaryForeground);
-			Resources.Add("ButtonForegroundPressed", secondaryForeground);
-		}
-
-		textBlock = DisplayHelper.CreateTextBlock(text, fontSize: (int)(size / 2));
-		textBlock.Padding = new Thickness(0, 0, DisplayHelper.Settings.Space, DisplayHelper.Settings.Border);
+		textBlock = DisplayHelper.CreateTextBlock(text, size / 2);
+		textBlock.Padding = new Thickness(DisplayHelper.Settings.Space, 0, DisplayHelper.Settings.Space, 0);
 
 		panel.Children.Add(icon);
 		panel.Children.Add(textBlock);
@@ -93,7 +112,7 @@ public class TextIconButton : Button
 	private void OnIsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
 	{
 		icon.Foreground = IsEnabled
-			? (SolidColorBrush)Resources["ButtonForeground"]
+			? Foreground
 			: DisplayHelper.Settings.TertiaryForegroundBrush;
 
 		textBlock.Foreground = IsEnabled
@@ -104,11 +123,11 @@ public class TextIconButton : Button
 	private void RefreshState()
 	{
 		Background = IsActive
-			? DisplayHelper.Settings.TertiaryBackground.WithAlpha(200).ToBrush()
+			? ActiveBackground
 			: DisplayHelper.Settings.TransperentBrush;
 
 		BorderBrush = IsActive
-			? DisplayHelper.Settings.AccentBrush
+			? ActiveBorderBrush
 			: DisplayHelper.Settings.TransperentBrush;
 	}
 }

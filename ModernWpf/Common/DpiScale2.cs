@@ -1,14 +1,12 @@
-﻿using System.Windows;
-
-namespace ModernWpf
+﻿namespace ModernWpf
 {
-    internal readonly record struct DpiScale2
-    {
-        public DpiScale2(double dpiScaleX, double dpiScaleY)
-        {
-            DpiScaleX = dpiScaleX;
-            DpiScaleY = dpiScaleY;
-        }
+	internal readonly record struct DpiScale2
+	{
+		public DpiScale2(double dpiScaleX, double dpiScaleY)
+		{
+			DpiScaleX = dpiScaleX;
+			DpiScaleY = dpiScaleY;
+		}
 
 #if NET462_OR_NEWER
         public DpiScale2(DpiScale dpiScale)
@@ -17,7 +15,7 @@ namespace ModernWpf
         }
 #endif
 
-        public double DpiScaleX { get; }
-        public double DpiScaleY { get; }
-    }
+		public double DpiScaleX { get; }
+		public double DpiScaleY { get; }
+	}
 }

@@ -3,197 +3,198 @@
 
 using System.Collections;
 using System.Windows;
+
 using ModernWpf.Controls.Primitives;
 
 namespace ModernWpf.Controls
 {
-    partial class NavigationViewItem
-    {
-        #region Icon
+	partial class NavigationViewItem
+	{
+		#region Icon
 
-        public static readonly DependencyProperty IconProperty =
-            DependencyProperty.Register(
-                nameof(Icon),
-                typeof(IconElement),
-                typeof(NavigationViewItem),
-                new PropertyMetadata(OnIconPropertyChanged));
+		public static readonly DependencyProperty IconProperty =
+			DependencyProperty.Register(
+				nameof(Icon),
+				typeof(IconElement),
+				typeof(NavigationViewItem),
+				new PropertyMetadata(OnIconPropertyChanged));
 
-        public IconElement Icon
-        {
-            get => (IconElement)GetValue(IconProperty);
-            set => SetValue(IconProperty, value);
-        }
+		public IconElement Icon
+		{
+			get => (IconElement)GetValue(IconProperty);
+			set => SetValue(IconProperty, value);
+		}
 
-        private static void OnIconPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
-        {
-            var owner = (NavigationViewItem)sender;
-            owner.OnIconPropertyChanged(args);
-        }
+		private static void OnIconPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
+		{
+			var owner = (NavigationViewItem)sender;
+			owner.OnIconPropertyChanged(args);
+		}
 
-        #endregion
+		#endregion
 
-        #region CompactPaneLength
+		#region CompactPaneLength
 
-        private static readonly DependencyPropertyKey CompactPaneLengthPropertyKey =
-            DependencyProperty.RegisterReadOnly(
-                nameof(CompactPaneLength),
-                typeof(double),
-                typeof(NavigationViewItem),
-                new PropertyMetadata(48.0));
+		private static readonly DependencyPropertyKey CompactPaneLengthPropertyKey =
+			DependencyProperty.RegisterReadOnly(
+				nameof(CompactPaneLength),
+				typeof(double),
+				typeof(NavigationViewItem),
+				new PropertyMetadata(48.0));
 
-        public static readonly DependencyProperty CompactPaneLengthProperty =
-            CompactPaneLengthPropertyKey.DependencyProperty;
+		public static readonly DependencyProperty CompactPaneLengthProperty =
+			CompactPaneLengthPropertyKey.DependencyProperty;
 
-        public double CompactPaneLength
-        {
-            get => (double)GetValue(CompactPaneLengthProperty);
-            private set => SetValue(CompactPaneLengthPropertyKey, value);
-        }
+		public double CompactPaneLength
+		{
+			get => (double)GetValue(CompactPaneLengthProperty);
+			private set => SetValue(CompactPaneLengthPropertyKey, value);
+		}
 
-        #endregion
+		#endregion
 
-        #region SelectsOnInvoked
+		#region SelectsOnInvoked
 
-        public static readonly DependencyProperty SelectsOnInvokedProperty =
-            DependencyProperty.Register(
-                nameof(SelectsOnInvoked),
-                typeof(bool),
-                typeof(NavigationViewItem),
-                new PropertyMetadata(true));
+		public static readonly DependencyProperty SelectsOnInvokedProperty =
+			DependencyProperty.Register(
+				nameof(SelectsOnInvoked),
+				typeof(bool),
+				typeof(NavigationViewItem),
+				new PropertyMetadata(true));
 
-        public bool SelectsOnInvoked
-        {
-            get => (bool)GetValue(SelectsOnInvokedProperty);
-            set => SetValue(SelectsOnInvokedProperty, value);
-        }
+		public bool SelectsOnInvoked
+		{
+			get => (bool)GetValue(SelectsOnInvokedProperty);
+			set => SetValue(SelectsOnInvokedProperty, value);
+		}
 
-        #endregion
+		#endregion
 
-        #region IsExpanded
+		#region IsExpanded
 
-        public static readonly DependencyProperty IsExpandedProperty =
-            DependencyProperty.Register(
-                nameof(IsExpanded),
-                typeof(bool),
-                typeof(NavigationViewItem),
-                new PropertyMetadata(false, OnIsExpandedPropertyChanged));
+		public static readonly DependencyProperty IsExpandedProperty =
+			DependencyProperty.Register(
+				nameof(IsExpanded),
+				typeof(bool),
+				typeof(NavigationViewItem),
+				new PropertyMetadata(false, OnIsExpandedPropertyChanged));
 
-        public bool IsExpanded
-        {
-            get => (bool)GetValue(IsExpandedProperty);
-            set => SetValue(IsExpandedProperty, value);
-        }
+		public bool IsExpanded
+		{
+			get => (bool)GetValue(IsExpandedProperty);
+			set => SetValue(IsExpandedProperty, value);
+		}
 
-        internal event DependencyPropertyChangedCallback IsExpandedChanged;
+		internal event DependencyPropertyChangedCallback IsExpandedChanged;
 
-        private static void OnIsExpandedPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
-        {
-            var owner = (NavigationViewItem)sender;
-            owner.OnIsExpandedPropertyChanged(args);
-            owner.IsExpandedChanged?.Invoke(owner, args.Property);
-        }
+		private static void OnIsExpandedPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
+		{
+			var owner = (NavigationViewItem)sender;
+			owner.OnIsExpandedPropertyChanged(args);
+			owner.IsExpandedChanged?.Invoke(owner, args.Property);
+		}
 
-        #endregion
+		#endregion
 
-        #region HasUnrealizedChildren
+		#region HasUnrealizedChildren
 
-        public static readonly DependencyProperty HasUnrealizedChildrenProperty =
-            DependencyProperty.Register(
-                nameof(HasUnrealizedChildren),
-                typeof(bool),
-                typeof(NavigationViewItem),
-                new PropertyMetadata(false, OnHasUnrealizedChildrenPropertyChanged));
+		public static readonly DependencyProperty HasUnrealizedChildrenProperty =
+			DependencyProperty.Register(
+				nameof(HasUnrealizedChildren),
+				typeof(bool),
+				typeof(NavigationViewItem),
+				new PropertyMetadata(false, OnHasUnrealizedChildrenPropertyChanged));
 
-        public bool HasUnrealizedChildren
-        {
-            get => (bool)GetValue(HasUnrealizedChildrenProperty);
-            set => SetValue(HasUnrealizedChildrenProperty, value);
-        }
+		public bool HasUnrealizedChildren
+		{
+			get => (bool)GetValue(HasUnrealizedChildrenProperty);
+			set => SetValue(HasUnrealizedChildrenProperty, value);
+		}
 
-        private static void OnHasUnrealizedChildrenPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
-        {
-            var owner = (NavigationViewItem)sender;
-            owner.OnHasUnrealizedChildrenPropertyChanged(args);
-        }
+		private static void OnHasUnrealizedChildrenPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
+		{
+			var owner = (NavigationViewItem)sender;
+			owner.OnHasUnrealizedChildrenPropertyChanged(args);
+		}
 
-        #endregion
+		#endregion
 
-        #region IsChildSelected
+		#region IsChildSelected
 
-        public static readonly DependencyProperty IsChildSelectedProperty =
-            DependencyProperty.Register(
-                nameof(IsChildSelected),
-                typeof(bool),
-                typeof(NavigationViewItem),
-                new PropertyMetadata(false));
+		public static readonly DependencyProperty IsChildSelectedProperty =
+			DependencyProperty.Register(
+				nameof(IsChildSelected),
+				typeof(bool),
+				typeof(NavigationViewItem),
+				new PropertyMetadata(false));
 
-        public bool IsChildSelected
-        {
-            get => (bool)GetValue(IsChildSelectedProperty);
-            set => SetValue(IsChildSelectedProperty, value);
-        }
+		public bool IsChildSelected
+		{
+			get => (bool)GetValue(IsChildSelectedProperty);
+			set => SetValue(IsChildSelectedProperty, value);
+		}
 
-        #endregion
+		#endregion
 
-        #region MenuItems
+		#region MenuItems
 
-        private static readonly DependencyPropertyKey MenuItemsPropertyKey =
-            DependencyProperty.RegisterReadOnly(
-                nameof(MenuItems),
-                typeof(IList),
-                typeof(NavigationViewItem),
-                new PropertyMetadata(OnMenuItemsPropertyChanged));
+		private static readonly DependencyPropertyKey MenuItemsPropertyKey =
+			DependencyProperty.RegisterReadOnly(
+				nameof(MenuItems),
+				typeof(IList),
+				typeof(NavigationViewItem),
+				new PropertyMetadata(OnMenuItemsPropertyChanged));
 
-        public static readonly DependencyProperty MenuItemsProperty =
-            MenuItemsPropertyKey.DependencyProperty;
+		public static readonly DependencyProperty MenuItemsProperty =
+			MenuItemsPropertyKey.DependencyProperty;
 
-        public IList MenuItems
-        {
-            get => (IList)GetValue(MenuItemsProperty);
-        }
+		public IList MenuItems
+		{
+			get => (IList)GetValue(MenuItemsProperty);
+		}
 
-        private static void OnMenuItemsPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
-        {
-            var owner = (NavigationViewItem)sender;
-            owner.OnMenuItemsPropertyChanged(args);
-        }
+		private static void OnMenuItemsPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
+		{
+			var owner = (NavigationViewItem)sender;
+			owner.OnMenuItemsPropertyChanged(args);
+		}
 
-        #endregion
+		#endregion
 
-        #region MenuItemsSource
+		#region MenuItemsSource
 
-        public static readonly DependencyProperty MenuItemsSourceProperty =
-            DependencyProperty.Register(
-                nameof(MenuItemsSource),
-                typeof(object),
-                typeof(NavigationViewItem),
-                new PropertyMetadata(OnMenuItemsSourcePropertyChanged));
+		public static readonly DependencyProperty MenuItemsSourceProperty =
+			DependencyProperty.Register(
+				nameof(MenuItemsSource),
+				typeof(object),
+				typeof(NavigationViewItem),
+				new PropertyMetadata(OnMenuItemsSourcePropertyChanged));
 
-        public object MenuItemsSource
-        {
-            get => GetValue(MenuItemsSourceProperty);
-            set => SetValue(MenuItemsSourceProperty, value);
-        }
+		public object MenuItemsSource
+		{
+			get => GetValue(MenuItemsSourceProperty);
+			set => SetValue(MenuItemsSourceProperty, value);
+		}
 
-        private static void OnMenuItemsSourcePropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
-        {
-            var owner = (NavigationViewItem)sender;
-            owner.OnMenuItemsSourcePropertyChanged(args);
-        }
+		private static void OnMenuItemsSourcePropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
+		{
+			var owner = (NavigationViewItem)sender;
+			owner.OnMenuItemsSourcePropertyChanged(args);
+		}
 
-        #endregion
+		#endregion
 
-        #region CornerRadius
+		#region CornerRadius
 
-        public static readonly DependencyProperty CornerRadiusProperty =
-            ControlHelper.CornerRadiusProperty.AddOwner(typeof(NavigationViewItem));
+		public static readonly DependencyProperty CornerRadiusProperty =
+			ControlHelper.CornerRadiusProperty.AddOwner(typeof(NavigationViewItem));
 
-        public CornerRadius CornerRadius
-        {
-            get => (CornerRadius)GetValue(CornerRadiusProperty);
-            set => SetValue(CornerRadiusProperty, value);
-        }
+		public CornerRadius CornerRadius
+		{
+			get => (CornerRadius)GetValue(CornerRadiusProperty);
+			set => SetValue(CornerRadiusProperty, value);
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

@@ -6,19 +6,19 @@ using System.Windows;
 
 namespace ModernWpf.Controls
 {
-    public sealed class ItemsRepeaterElementClearingEventArgs : EventArgs
-    {
-        internal ItemsRepeaterElementClearingEventArgs(
-            UIElement element)
-        {
-            Update(element);
-        }
+	public sealed class ItemsRepeaterElementClearingEventArgs : EventArgs
+	{
+		internal ItemsRepeaterElementClearingEventArgs(
+			UIElement element)
+		{
+			Update(element);
+		}
 
-        public UIElement Element { get; private set; }
+		public UIElement Element { get; private set; }
 
-        internal void Update(UIElement element)
-        {
-            Element = element;
-        }
-    }
+		internal void Update(UIElement element)
+		{
+			Element = element;
+		}
+	}
 }

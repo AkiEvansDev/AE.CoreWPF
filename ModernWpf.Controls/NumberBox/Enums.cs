@@ -3,16 +3,16 @@
 
 namespace ModernWpf.Controls
 {
-    public enum NumberBoxSpinButtonPlacementMode
-    {
-        Hidden,
-        Compact,
-        Inline
-    }
+	public enum NumberBoxSpinButtonPlacementMode
+	{
+		Hidden,
+		Compact,
+		Inline
+	}
 
-    public enum NumberBoxValidationMode
-    {
-        InvalidInputOverwritten,
-        Disabled
-    }
+	public enum NumberBoxValidationMode
+	{
+		InvalidInputOverwritten,
+		Disabled
+	}
 }

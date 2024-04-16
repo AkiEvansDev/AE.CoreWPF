@@ -3,65 +3,65 @@ using System.Windows;
 
 namespace ModernWpf
 {
-    public class ResourceDictionaryEx : ResourceDictionary
-    {
-        private ResourceDictionary _mergedThemeDictionary;
+	public class ResourceDictionaryEx : ResourceDictionary
+	{
+		private ResourceDictionary _mergedThemeDictionary;
 
-        /// <summary>
-        /// Gets a collection of merged resource dictionaries that are specifically keyed
-        /// and composed to address theme scenarios, for example supplying theme values for
-        /// "HighContrast".
-        /// </summary>
-        /// <returns>
-        /// A dictionary of ResourceDictionary theme dictionaries. Each must be keyed with
-        /// **x:Key**.
-        /// </returns>
-        public Dictionary<object, ResourceDictionary> ThemeDictionaries { get; } = new Dictionary<object, ResourceDictionary>();
+		/// <summary>
+		/// Gets a collection of merged resource dictionaries that are specifically keyed
+		/// and composed to address theme scenarios, for example supplying theme values for
+		/// "HighContrast".
+		/// </summary>
+		/// <returns>
+		/// A dictionary of ResourceDictionary theme dictionaries. Each must be keyed with
+		/// **x:Key**.
+		/// </returns>
+		public Dictionary<object, ResourceDictionary> ThemeDictionaries { get; } = new Dictionary<object, ResourceDictionary>();
 
-        internal ResourceDictionary MergedAppThemeDictionary { get; set; }
+		internal ResourceDictionary MergedAppThemeDictionary { get; set; }
 
-        internal void Update(string themeKey)
-        {
-            if (ThemeDictionaries.TryGetValue(themeKey, out ResourceDictionary themeDictionary))
-            {
-                if (_mergedThemeDictionary != null)
-                {
-                    if (_mergedThemeDictionary == themeDictionary)
-                    {
-                        return;
-                    }
-                    else
-                    {
-                        int targetIndex = MergedDictionaries.IndexOf(_mergedThemeDictionary);
-                        MergedDictionaries[targetIndex] = themeDictionary;
-                        _mergedThemeDictionary = themeDictionary;
-                    }
-                }
-                else
-                {
-                    int targetIndex;
+		internal void Update(string themeKey)
+		{
+			if (ThemeDictionaries.TryGetValue(themeKey, out ResourceDictionary themeDictionary))
+			{
+				if (_mergedThemeDictionary != null)
+				{
+					if (_mergedThemeDictionary == themeDictionary)
+					{
+						return;
+					}
+					else
+					{
+						int targetIndex = MergedDictionaries.IndexOf(_mergedThemeDictionary);
+						MergedDictionaries[targetIndex] = themeDictionary;
+						_mergedThemeDictionary = themeDictionary;
+					}
+				}
+				else
+				{
+					int targetIndex;
 
-                    if (MergedAppThemeDictionary != null)
-                    {
-                        targetIndex = MergedDictionaries.IndexOf(MergedAppThemeDictionary) + 1;
-                    }
-                    else
-                    {
-                        targetIndex = 0;
-                    }
+					if (MergedAppThemeDictionary != null)
+					{
+						targetIndex = MergedDictionaries.IndexOf(MergedAppThemeDictionary) + 1;
+					}
+					else
+					{
+						targetIndex = 0;
+					}
 
-                    MergedDictionaries.Insert(targetIndex, themeDictionary);
-                    _mergedThemeDictionary = themeDictionary;
-                }
-            }
-            else
-            {
-                if (_mergedThemeDictionary != null)
-                {
-                    MergedDictionaries.Remove(_mergedThemeDictionary);
-                    _mergedThemeDictionary = null;
-                }
-            }
-        }
-    }
+					MergedDictionaries.Insert(targetIndex, themeDictionary);
+					_mergedThemeDictionary = themeDictionary;
+				}
+			}
+			else
+			{
+				if (_mergedThemeDictionary != null)
+				{
+					MergedDictionaries.Remove(_mergedThemeDictionary);
+					_mergedThemeDictionary = null;
+				}
+			}
+		}
+	}
 }

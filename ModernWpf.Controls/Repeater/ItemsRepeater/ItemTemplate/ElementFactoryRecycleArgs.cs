@@ -5,13 +5,13 @@ using System.Windows;
 
 namespace ModernWpf.Controls
 {
-    public sealed class ElementFactoryRecycleArgs
-    {
-        public ElementFactoryRecycleArgs()
-        {
-        }
+	public sealed class ElementFactoryRecycleArgs
+	{
+		public ElementFactoryRecycleArgs()
+		{
+		}
 
-        public UIElement Parent { get; set; }
-        public UIElement Element { get; set; }
-    }
+		public UIElement Parent { get; set; }
+		public UIElement Element { get; set; }
+	}
 }

@@ -1,9 +1,9 @@
 ﻿namespace ModernWpf.DesignTime
 {
-    public class IntellisenseResources : IntellisenseResourcesBase
-    {
-        public IntellisenseResources()
-        {
-        }
-    }
+	public class IntellisenseResources : IntellisenseResourcesBase
+	{
+		public IntellisenseResources()
+		{
+		}
+	}
 }

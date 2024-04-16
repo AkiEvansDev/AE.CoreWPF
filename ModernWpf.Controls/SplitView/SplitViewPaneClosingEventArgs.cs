@@ -2,12 +2,12 @@
 
 namespace ModernWpf.Controls
 {
-    public sealed class SplitViewPaneClosingEventArgs : EventArgs
-    {
-        internal SplitViewPaneClosingEventArgs()
-        {
-        }
+	public sealed class SplitViewPaneClosingEventArgs : EventArgs
+	{
+		internal SplitViewPaneClosingEventArgs()
+		{
+		}
 
-        public bool Cancel { get; set; }
-    }
+		public bool Cancel { get; set; }
+	}
 }

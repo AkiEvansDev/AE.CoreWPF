@@ -5,12 +5,12 @@ using System;
 
 namespace ModernWpf.Controls
 {
-    public sealed class NavigationViewDisplayModeChangedEventArgs : EventArgs
-    {
-        internal NavigationViewDisplayModeChangedEventArgs()
-        {
-        }
+	public sealed class NavigationViewDisplayModeChangedEventArgs : EventArgs
+	{
+		internal NavigationViewDisplayModeChangedEventArgs()
+		{
+		}
 
-        public NavigationViewDisplayMode DisplayMode { get; internal set; }
-    }
+		public NavigationViewDisplayMode DisplayMode { get; internal set; }
+	}
 }

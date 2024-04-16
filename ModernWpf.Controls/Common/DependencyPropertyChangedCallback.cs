@@ -2,5 +2,5 @@
 
 namespace ModernWpf
 {
-    internal delegate void DependencyPropertyChangedCallback(DependencyObject sender, DependencyProperty dp);
+	internal delegate void DependencyPropertyChangedCallback(DependencyObject sender, DependencyProperty dp);
 }

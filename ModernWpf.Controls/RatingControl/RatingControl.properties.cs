@@ -2,201 +2,202 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System.Windows;
+
 using ModernWpf.Controls.Primitives;
 
 namespace ModernWpf.Controls
 {
-    partial class RatingControl
-    {
-        #region Caption
+	partial class RatingControl
+	{
+		#region Caption
 
-        public static readonly DependencyProperty CaptionProperty =
-            DependencyProperty.Register(
-                nameof(Caption),
-                typeof(string),
-                typeof(RatingControl),
-                new PropertyMetadata(string.Empty, OnCaptionPropertyChanged));
+		public static readonly DependencyProperty CaptionProperty =
+			DependencyProperty.Register(
+				nameof(Caption),
+				typeof(string),
+				typeof(RatingControl),
+				new PropertyMetadata(string.Empty, OnCaptionPropertyChanged));
 
-        public string Caption
-        {
-            get => (string)GetValue(CaptionProperty);
-            set => SetValue(CaptionProperty, value);
-        }
+		public string Caption
+		{
+			get => (string)GetValue(CaptionProperty);
+			set => SetValue(CaptionProperty, value);
+		}
 
-        private static void OnCaptionPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
-        {
-            ((RatingControl)sender).PrivateOnPropertyChanged(args);
-        }
+		private static void OnCaptionPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
+		{
+			((RatingControl)sender).PrivateOnPropertyChanged(args);
+		}
 
-        #endregion
+		#endregion
 
-        #region InitialSetValue
+		#region InitialSetValue
 
-        public static readonly DependencyProperty InitialSetValueProperty =
-            DependencyProperty.Register(
-                nameof(InitialSetValue),
-                typeof(int),
-                typeof(RatingControl),
-                new PropertyMetadata(1, OnInitialSetValuePropertyChanged));
+		public static readonly DependencyProperty InitialSetValueProperty =
+			DependencyProperty.Register(
+				nameof(InitialSetValue),
+				typeof(int),
+				typeof(RatingControl),
+				new PropertyMetadata(1, OnInitialSetValuePropertyChanged));
 
-        public int InitialSetValue
-        {
-            get => (int)GetValue(InitialSetValueProperty);
-            set => SetValue(InitialSetValueProperty, value);
-        }
+		public int InitialSetValue
+		{
+			get => (int)GetValue(InitialSetValueProperty);
+			set => SetValue(InitialSetValueProperty, value);
+		}
 
-        private static void OnInitialSetValuePropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
-        {
-            ((RatingControl)sender).PrivateOnPropertyChanged(args);
-        }
+		private static void OnInitialSetValuePropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
+		{
+			((RatingControl)sender).PrivateOnPropertyChanged(args);
+		}
 
-        #endregion
+		#endregion
 
-        #region IsClearEnabled
+		#region IsClearEnabled
 
-        public static readonly DependencyProperty IsClearEnabledProperty =
-            DependencyProperty.Register(
-                nameof(IsClearEnabled),
-                typeof(bool),
-                typeof(RatingControl),
-                new PropertyMetadata(true, OnIsClearEnabledPropertyChanged));
+		public static readonly DependencyProperty IsClearEnabledProperty =
+			DependencyProperty.Register(
+				nameof(IsClearEnabled),
+				typeof(bool),
+				typeof(RatingControl),
+				new PropertyMetadata(true, OnIsClearEnabledPropertyChanged));
 
-        public bool IsClearEnabled
-        {
-            get => (bool)GetValue(IsClearEnabledProperty);
-            set => SetValue(IsClearEnabledProperty, value);
-        }
+		public bool IsClearEnabled
+		{
+			get => (bool)GetValue(IsClearEnabledProperty);
+			set => SetValue(IsClearEnabledProperty, value);
+		}
 
-        private static void OnIsClearEnabledPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
-        {
-            ((RatingControl)sender).PrivateOnPropertyChanged(args);
-        }
+		private static void OnIsClearEnabledPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
+		{
+			((RatingControl)sender).PrivateOnPropertyChanged(args);
+		}
 
-        #endregion
+		#endregion
 
-        #region IsReadOnly
+		#region IsReadOnly
 
-        public static readonly DependencyProperty IsReadOnlyProperty =
-            DependencyProperty.Register(
-                nameof(IsReadOnly),
-                typeof(bool),
-                typeof(RatingControl),
-                new PropertyMetadata(false, OnIsReadOnlyPropertyChanged));
+		public static readonly DependencyProperty IsReadOnlyProperty =
+			DependencyProperty.Register(
+				nameof(IsReadOnly),
+				typeof(bool),
+				typeof(RatingControl),
+				new PropertyMetadata(false, OnIsReadOnlyPropertyChanged));
 
-        public bool IsReadOnly
-        {
-            get => (bool)GetValue(IsReadOnlyProperty);
-            set => SetValue(IsReadOnlyProperty, value);
-        }
+		public bool IsReadOnly
+		{
+			get => (bool)GetValue(IsReadOnlyProperty);
+			set => SetValue(IsReadOnlyProperty, value);
+		}
 
-        private static void OnIsReadOnlyPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
-        {
-            ((RatingControl)sender).PrivateOnPropertyChanged(args);
-        }
+		private static void OnIsReadOnlyPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
+		{
+			((RatingControl)sender).PrivateOnPropertyChanged(args);
+		}
 
-        #endregion
+		#endregion
 
-        #region ItemInfo
+		#region ItemInfo
 
-        public static readonly DependencyProperty ItemInfoProperty =
-            DependencyProperty.Register(
-                nameof(ItemInfo),
-                typeof(RatingItemInfo),
-                typeof(RatingControl),
-                new PropertyMetadata(OnItemInfoPropertyChanged));
+		public static readonly DependencyProperty ItemInfoProperty =
+			DependencyProperty.Register(
+				nameof(ItemInfo),
+				typeof(RatingItemInfo),
+				typeof(RatingControl),
+				new PropertyMetadata(OnItemInfoPropertyChanged));
 
-        public RatingItemInfo ItemInfo
-        {
-            get => (RatingItemInfo)GetValue(ItemInfoProperty);
-            set => SetValue(ItemInfoProperty, value);
-        }
+		public RatingItemInfo ItemInfo
+		{
+			get => (RatingItemInfo)GetValue(ItemInfoProperty);
+			set => SetValue(ItemInfoProperty, value);
+		}
 
-        private static void OnItemInfoPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
-        {
-            ((RatingControl)sender).PrivateOnPropertyChanged(args);
-        }
+		private static void OnItemInfoPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
+		{
+			((RatingControl)sender).PrivateOnPropertyChanged(args);
+		}
 
-        #endregion
+		#endregion
 
-        #region MaxRating
+		#region MaxRating
 
-        public static readonly DependencyProperty MaxRatingProperty =
-            DependencyProperty.Register(
-                nameof(MaxRating),
-                typeof(int),
-                typeof(RatingControl),
-                new PropertyMetadata(5, OnMaxRatingPropertyChanged));
+		public static readonly DependencyProperty MaxRatingProperty =
+			DependencyProperty.Register(
+				nameof(MaxRating),
+				typeof(int),
+				typeof(RatingControl),
+				new PropertyMetadata(5, OnMaxRatingPropertyChanged));
 
-        public int MaxRating
-        {
-            get => (int)GetValue(MaxRatingProperty);
-            set => SetValue(MaxRatingProperty, value);
-        }
+		public int MaxRating
+		{
+			get => (int)GetValue(MaxRatingProperty);
+			set => SetValue(MaxRatingProperty, value);
+		}
 
-        private static void OnMaxRatingPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
-        {
-            ((RatingControl)sender).PrivateOnPropertyChanged(args);
-        }
+		private static void OnMaxRatingPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
+		{
+			((RatingControl)sender).PrivateOnPropertyChanged(args);
+		}
 
-        #endregion
+		#endregion
 
-        #region PlaceholderValue
+		#region PlaceholderValue
 
-        public static readonly DependencyProperty PlaceholderValueProperty =
-            DependencyProperty.Register(
-                nameof(PlaceholderValue),
-                typeof(double),
-                typeof(RatingControl),
-                new PropertyMetadata(-1d, OnPlaceholderValuePropertyChanged));
+		public static readonly DependencyProperty PlaceholderValueProperty =
+			DependencyProperty.Register(
+				nameof(PlaceholderValue),
+				typeof(double),
+				typeof(RatingControl),
+				new PropertyMetadata(-1d, OnPlaceholderValuePropertyChanged));
 
-        public double PlaceholderValue
-        {
-            get => (double)GetValue(PlaceholderValueProperty);
-            set => SetValue(PlaceholderValueProperty, value);
-        }
+		public double PlaceholderValue
+		{
+			get => (double)GetValue(PlaceholderValueProperty);
+			set => SetValue(PlaceholderValueProperty, value);
+		}
 
-        private static void OnPlaceholderValuePropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
-        {
-            ((RatingControl)sender).PrivateOnPropertyChanged(args);
-        }
+		private static void OnPlaceholderValuePropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
+		{
+			((RatingControl)sender).PrivateOnPropertyChanged(args);
+		}
 
-        #endregion
+		#endregion
 
-        #region Value
+		#region Value
 
-        public static readonly DependencyProperty ValueProperty =
-            DependencyProperty.Register(
-                nameof(Value),
-                typeof(double),
-                typeof(RatingControl),
-                new PropertyMetadata(-1d, OnValuePropertyChanged));
+		public static readonly DependencyProperty ValueProperty =
+			DependencyProperty.Register(
+				nameof(Value),
+				typeof(double),
+				typeof(RatingControl),
+				new PropertyMetadata(-1d, OnValuePropertyChanged));
 
-        public double Value
-        {
-            get => (double)GetValue(ValueProperty);
-            set => SetValue(ValueProperty, value);
-        }
+		public double Value
+		{
+			get => (double)GetValue(ValueProperty);
+			set => SetValue(ValueProperty, value);
+		}
 
-        private static void OnValuePropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
-        {
-            ((RatingControl)sender).PrivateOnPropertyChanged(args);
-        }
+		private static void OnValuePropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
+		{
+			((RatingControl)sender).PrivateOnPropertyChanged(args);
+		}
 
-        #endregion
+		#endregion
 
-        #region UseSystemFocusVisuals
+		#region UseSystemFocusVisuals
 
-        public static readonly DependencyProperty UseSystemFocusVisualsProperty =
-            FocusVisualHelper.UseSystemFocusVisualsProperty.AddOwner(typeof(RatingControl));
+		public static readonly DependencyProperty UseSystemFocusVisualsProperty =
+			FocusVisualHelper.UseSystemFocusVisualsProperty.AddOwner(typeof(RatingControl));
 
-        public bool UseSystemFocusVisuals
-        {
-            get => (bool)GetValue(UseSystemFocusVisualsProperty);
-            set => SetValue(UseSystemFocusVisualsProperty, value);
-        }
+		public bool UseSystemFocusVisuals
+		{
+			get => (bool)GetValue(UseSystemFocusVisualsProperty);
+			set => SetValue(UseSystemFocusVisualsProperty, value);
+		}
 
-        #endregion
+		#endregion
 
-        public event TypedEventHandler<RatingControl, object> ValueChanged;
-    }
+		public event TypedEventHandler<RatingControl, object> ValueChanged;
+	}
 }

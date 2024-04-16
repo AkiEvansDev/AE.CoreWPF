@@ -7,8 +7,6 @@ namespace AE.CoreWPF.Controls;
 
 public class ExpandButton : Button
 {
-	private Polygon polygon;
-
 	private bool isExpanded;
 	public bool IsExpanded
 	{
@@ -19,6 +17,8 @@ public class ExpandButton : Button
 			RefreshState();
 		}
 	}
+
+	private Polygon polygon;
 
 	public ExpandButton()
 	{

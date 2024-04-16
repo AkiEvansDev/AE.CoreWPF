@@ -4,78 +4,79 @@
 using System.Windows.Automation;
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
+
 using ModernWpf.Controls;
 
 namespace ModernWpf.Automation.Peers
 {
-    public class DropDownButtonAutomationPeer : ButtonAutomationPeer, IExpandCollapseProvider
-    {
-        public DropDownButtonAutomationPeer(DropDownButton owner) : base(owner)
-        {
-        }
+	public class DropDownButtonAutomationPeer : ButtonAutomationPeer, IExpandCollapseProvider
+	{
+		public DropDownButtonAutomationPeer(DropDownButton owner) : base(owner)
+		{
+		}
 
-        public override object GetPattern(PatternInterface patternInterface)
-        {
-            if (patternInterface == PatternInterface.ExpandCollapse)
-            {
-                return this;
-            }
+		public override object GetPattern(PatternInterface patternInterface)
+		{
+			if (patternInterface == PatternInterface.ExpandCollapse)
+			{
+				return this;
+			}
 
-            return base.GetPattern(patternInterface);
-        }
+			return base.GetPattern(patternInterface);
+		}
 
-        protected override string GetClassNameCore()
-        {
-            return nameof(DropDownButton);
-        }
+		protected override string GetClassNameCore()
+		{
+			return nameof(DropDownButton);
+		}
 
-        private DropDownButton GetImpl()
-        {
-            DropDownButton impl = null;
+		private DropDownButton GetImpl()
+		{
+			DropDownButton impl = null;
 
-            if (Owner is DropDownButton dropDownButton)
-            {
-                impl = dropDownButton;
-            }
+			if (Owner is DropDownButton dropDownButton)
+			{
+				impl = dropDownButton;
+			}
 
-            return impl;
-        }
+			return impl;
+		}
 
-        public ExpandCollapseState ExpandCollapseState
-        {
-            get
-            {
-                ExpandCollapseState currentState = ExpandCollapseState.Collapsed;
+		public ExpandCollapseState ExpandCollapseState
+		{
+			get
+			{
+				ExpandCollapseState currentState = ExpandCollapseState.Collapsed;
 
-                var dropDownButton = GetImpl();
-                if (dropDownButton != null)
-                {
-                    if (dropDownButton.IsFlyoutOpen)
-                    {
-                        currentState = ExpandCollapseState.Expanded;
-                    }
-                }
+				var dropDownButton = GetImpl();
+				if (dropDownButton != null)
+				{
+					if (dropDownButton.IsFlyoutOpen)
+					{
+						currentState = ExpandCollapseState.Expanded;
+					}
+				}
 
-                return currentState;
-            }
-        }
+				return currentState;
+			}
+		}
 
-        public void Expand()
-        {
-            var dropDownButton = GetImpl();
-            if (dropDownButton != null)
-            {
-                dropDownButton.OpenFlyout();
-            }
-        }
+		public void Expand()
+		{
+			var dropDownButton = GetImpl();
+			if (dropDownButton != null)
+			{
+				dropDownButton.OpenFlyout();
+			}
+		}
 
-        public void Collapse()
-        {
-            var dropDownButton = GetImpl();
-            if (dropDownButton != null)
-            {
-                dropDownButton.CloseFlyout();
-            }
-        }
-    }
+		public void Collapse()
+		{
+			var dropDownButton = GetImpl();
+			if (dropDownButton != null)
+			{
+				dropDownButton.CloseFlyout();
+			}
+		}
+	}
 }

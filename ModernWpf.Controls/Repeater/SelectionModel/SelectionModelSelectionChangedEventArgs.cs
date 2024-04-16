@@ -3,7 +3,7 @@
 
 namespace ModernWpf.Controls
 {
-    public sealed class SelectionModelSelectionChangedEventArgs
-    {
-    }
+	public sealed class SelectionModelSelectionChangedEventArgs
+	{
+	}
 }

@@ -9,13 +9,13 @@ namespace AE.CoreWPF.Controls;
 
 public class ColorButton : DropDownButton
 {
-	private ColorPicker colorPicker;
-
 	public Color SelectColor
 	{
 		get => colorPicker.SelectColor;
 		set => colorPicker.SelectColor = value;
 	}
+
+	private ColorPicker colorPicker;
 
 	public ColorButton(double size, double scale)
 	{
@@ -24,11 +24,15 @@ public class ColorButton : DropDownButton
 
 	public void Layout(double size, double scale)
 	{
-		//Style = (Style)Application.Current.Resources["DefaultButtonStyle"];
+		Background = DisplayHelper.Settings.TertiaryBackgroundBrush;
+
+		ControlHelper.SetCornerRadius(this, new CornerRadius(DisplayHelper.Settings.MinRound));
+
 		colorPicker = new ColorPicker
 		{
 			Background = DisplayHelper.Settings.TertiaryBackgroundBrush,
 			ColorOpacityEnabled = false,
+			SnapsToDevicePixels = true,
 		};
 
 		var viewBox = new Border

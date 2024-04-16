@@ -5,32 +5,32 @@ using System;
 
 namespace ModernWpf.Controls
 {
-    public sealed class NavigationViewPaneClosingEventArgs : EventArgs
-    {
-        internal NavigationViewPaneClosingEventArgs()
-        {
-        }
+	public sealed class NavigationViewPaneClosingEventArgs : EventArgs
+	{
+		internal NavigationViewPaneClosingEventArgs()
+		{
+		}
 
-        public bool Cancel
-        {
-            get => m_cancelled;
-            set
-            {
-                m_cancelled = value;
+		public bool Cancel
+		{
+			get => m_cancelled;
+			set
+			{
+				m_cancelled = value;
 
-                if (m_splitViewClosingArgs is { } args)
-                {
-                    args.Cancel = value;
-                }
-            }
-        }
+				if (m_splitViewClosingArgs is { } args)
+				{
+					args.Cancel = value;
+				}
+			}
+		}
 
-        internal void SplitViewClosingArgs(SplitViewPaneClosingEventArgs value)
-        {
-            m_splitViewClosingArgs = value;
-        }
+		internal void SplitViewClosingArgs(SplitViewPaneClosingEventArgs value)
+		{
+			m_splitViewClosingArgs = value;
+		}
 
-        SplitViewPaneClosingEventArgs m_splitViewClosingArgs;
-        bool m_cancelled;
-    }
+		SplitViewPaneClosingEventArgs m_splitViewClosingArgs;
+		bool m_cancelled;
+	}
 }

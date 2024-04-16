@@ -5,11 +5,11 @@ using System.Windows;
 
 namespace ModernWpf.Controls
 {
-    public interface IScrollAnchorProvider
-    {
-        void RegisterAnchorCandidate(UIElement element);
-        void UnregisterAnchorCandidate(UIElement element);
+	public interface IScrollAnchorProvider
+	{
+		void RegisterAnchorCandidate(UIElement element);
+		void UnregisterAnchorCandidate(UIElement element);
 
-        UIElement CurrentAnchor { get; }
-    }
+		UIElement CurrentAnchor { get; }
+	}
 }

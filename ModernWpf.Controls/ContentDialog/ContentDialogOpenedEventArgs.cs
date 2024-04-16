@@ -2,10 +2,10 @@
 
 namespace ModernWpf.Controls
 {
-    public class ContentDialogOpenedEventArgs : EventArgs
-    {
-        internal ContentDialogOpenedEventArgs()
-        {
-        }
-    }
+	public class ContentDialogOpenedEventArgs : EventArgs
+	{
+		internal ContentDialogOpenedEventArgs()
+		{
+		}
+	}
 }

@@ -6,16 +6,16 @@ using System.Windows;
 
 namespace ModernWpf.Controls
 {
-    public sealed class SelectTemplateEventArgs : EventArgs
-    {
-        internal SelectTemplateEventArgs()
-        {
-        }
+	public sealed class SelectTemplateEventArgs : EventArgs
+	{
+		internal SelectTemplateEventArgs()
+		{
+		}
 
-        public string TemplateKey { get; set; }
+		public string TemplateKey { get; set; }
 
-        public object DataContext { get; internal set; }
+		public object DataContext { get; internal set; }
 
-        public UIElement Owner { get; internal set; }
-    }
+		public UIElement Owner { get; internal set; }
+	}
 }

@@ -4,89 +4,90 @@
 using System.Windows.Automation;
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
+
 using ModernWpf.Controls;
 
 namespace ModernWpf.Automation.Peers
 {
-    public class NumberBoxAutomationPeer : FrameworkElementAutomationPeer, IRangeValueProvider
-    {
-        public NumberBoxAutomationPeer(NumberBox owner) : base(owner)
-        {
-        }
+	public class NumberBoxAutomationPeer : FrameworkElementAutomationPeer, IRangeValueProvider
+	{
+		public NumberBoxAutomationPeer(NumberBox owner) : base(owner)
+		{
+		}
 
-        public override object GetPattern(PatternInterface patternInterface)
-        {
-            if (patternInterface == PatternInterface.RangeValue)
-            {
-                return this;
-            }
+		public override object GetPattern(PatternInterface patternInterface)
+		{
+			if (patternInterface == PatternInterface.RangeValue)
+			{
+				return this;
+			}
 
-            return base.GetPattern(patternInterface);
-        }
+			return base.GetPattern(patternInterface);
+		}
 
-        protected override string GetClassNameCore()
-        {
-            return nameof(NumberBox);
-        }
+		protected override string GetClassNameCore()
+		{
+			return nameof(NumberBox);
+		}
 
-        protected override string GetNameCore()
-        {
-            string name = base.GetNameCore();
+		protected override string GetNameCore()
+		{
+			string name = base.GetNameCore();
 
-            if (string.IsNullOrEmpty(name))
-            {
-                if (Owner is NumberBox numberBox)
-                {
-                    name = numberBox.Header?.ToString();
-                }
-            }
+			if (string.IsNullOrEmpty(name))
+			{
+				if (Owner is NumberBox numberBox)
+				{
+					name = numberBox.Header?.ToString();
+				}
+			}
 
-            return name ?? string.Empty;
-        }
+			return name ?? string.Empty;
+		}
 
-        protected override AutomationControlType GetAutomationControlTypeCore()
-        {
-            return AutomationControlType.Spinner;
-        }
+		protected override AutomationControlType GetAutomationControlTypeCore()
+		{
+			return AutomationControlType.Spinner;
+		}
 
-        #region IRangeValueProvider
+		#region IRangeValueProvider
 
-        NumberBox GetImpl()
-        {
-            NumberBox impl = null;
+		NumberBox GetImpl()
+		{
+			NumberBox impl = null;
 
-            if (Owner is NumberBox numberBox)
-            {
-                impl = numberBox;
-            }
+			if (Owner is NumberBox numberBox)
+			{
+				impl = numberBox;
+			}
 
-            return impl;
-        }
+			return impl;
+		}
 
-        public bool IsReadOnly => false;
+		public bool IsReadOnly => false;
 
-        public double Minimum => GetImpl().Minimum;
+		public double Minimum => GetImpl().Minimum;
 
-        public double Maximum => GetImpl().Maximum;
+		public double Maximum => GetImpl().Maximum;
 
-        public double Value => GetImpl().Value;
+		public double Value => GetImpl().Value;
 
-        public double SmallChange => GetImpl().SmallChange;
+		public double SmallChange => GetImpl().SmallChange;
 
-        public double LargeChange => GetImpl().LargeChange;
+		public double LargeChange => GetImpl().LargeChange;
 
-        public void SetValue(double value)
-        {
-            GetImpl().Value = value;
-        }
+		public void SetValue(double value)
+		{
+			GetImpl().Value = value;
+		}
 
-        public void RaiseValueChangedEvent(double oldValue, double newValue)
-        {
-            RaisePropertyChangedEvent(RangeValuePatternIdentifiers.ValueProperty,
-                oldValue,
-                newValue);
-        }
+		public void RaiseValueChangedEvent(double oldValue, double newValue)
+		{
+			RaisePropertyChangedEvent(RangeValuePatternIdentifiers.ValueProperty,
+				oldValue,
+				newValue);
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

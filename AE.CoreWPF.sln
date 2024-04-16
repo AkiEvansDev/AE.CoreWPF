@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModernWpf.Controls", "Moder
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AE.CoreWPF", "AE.CoreWPF\AE.CoreWPF.csproj", "{C3BC66F6-34E4-4BBC-B52E-B38907C62E43}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AE.CoreWPF.Controls", "AE.CoreWPF.Controls\AE.CoreWPF.Controls.csproj", "{B6A560BB-D03D-400A-94D1-829E06F081B6}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{C3BC66F6-34E4-4BBC-B52E-B38907C62E43}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3BC66F6-34E4-4BBC-B52E-B38907C62E43}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3BC66F6-34E4-4BBC-B52E-B38907C62E43}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B6A560BB-D03D-400A-94D1-829E06F081B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B6A560BB-D03D-400A-94D1-829E06F081B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B6A560BB-D03D-400A-94D1-829E06F081B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B6A560BB-D03D-400A-94D1-829E06F081B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

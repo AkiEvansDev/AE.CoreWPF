@@ -2,12 +2,12 @@
 
 namespace ModernWpf.Controls
 {
-    public sealed class AutoSuggestBoxSuggestionChosenEventArgs : EventArgs
-    {
-        public AutoSuggestBoxSuggestionChosenEventArgs()
-        {
-        }
+	public sealed class AutoSuggestBoxSuggestionChosenEventArgs : EventArgs
+	{
+		public AutoSuggestBoxSuggestionChosenEventArgs()
+		{
+		}
 
-        public object SelectedItem { get; internal set; }
-    }
+		public object SelectedItem { get; internal set; }
+	}
 }

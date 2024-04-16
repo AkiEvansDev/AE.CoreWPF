@@ -6,117 +6,117 @@ using System.Windows.Media;
 
 namespace ModernWpf.Controls
 {
-    public class RatingItemImageInfo : RatingItemInfo
-    {
-        public RatingItemImageInfo()
-        {
-        }
+	public class RatingItemImageInfo : RatingItemInfo
+	{
+		public RatingItemImageInfo()
+		{
+		}
 
-        #region DisabledImage
+		#region DisabledImage
 
-        public static readonly DependencyProperty DisabledImageProperty =
-            DependencyProperty.Register(
-                nameof(DisabledImage),
-                typeof(ImageSource),
-                typeof(RatingItemImageInfo),
-                null);
+		public static readonly DependencyProperty DisabledImageProperty =
+			DependencyProperty.Register(
+				nameof(DisabledImage),
+				typeof(ImageSource),
+				typeof(RatingItemImageInfo),
+				null);
 
-        public ImageSource DisabledImage
-        {
-            get => (ImageSource)GetValue(DisabledImageProperty);
-            set => SetValue(DisabledImageProperty, value);
-        }
+		public ImageSource DisabledImage
+		{
+			get => (ImageSource)GetValue(DisabledImageProperty);
+			set => SetValue(DisabledImageProperty, value);
+		}
 
-        #endregion
+		#endregion
 
-        #region Image
+		#region Image
 
-        public static readonly DependencyProperty ImageProperty =
-            DependencyProperty.Register(
-                nameof(Image),
-                typeof(ImageSource),
-                typeof(RatingItemImageInfo),
-                null);
+		public static readonly DependencyProperty ImageProperty =
+			DependencyProperty.Register(
+				nameof(Image),
+				typeof(ImageSource),
+				typeof(RatingItemImageInfo),
+				null);
 
-        public ImageSource Image
-        {
-            get => (ImageSource)GetValue(ImageProperty);
-            set => SetValue(ImageProperty, value);
-        }
+		public ImageSource Image
+		{
+			get => (ImageSource)GetValue(ImageProperty);
+			set => SetValue(ImageProperty, value);
+		}
 
-        #endregion
+		#endregion
 
-        #region PlaceholderImage
+		#region PlaceholderImage
 
-        public static readonly DependencyProperty PlaceholderImageProperty =
-            DependencyProperty.Register(
-                nameof(PlaceholderImage),
-                typeof(ImageSource),
-                typeof(RatingItemImageInfo),
-                null);
+		public static readonly DependencyProperty PlaceholderImageProperty =
+			DependencyProperty.Register(
+				nameof(PlaceholderImage),
+				typeof(ImageSource),
+				typeof(RatingItemImageInfo),
+				null);
 
-        public ImageSource PlaceholderImage
-        {
-            get => (ImageSource)GetValue(PlaceholderImageProperty);
-            set => SetValue(PlaceholderImageProperty, value);
-        }
+		public ImageSource PlaceholderImage
+		{
+			get => (ImageSource)GetValue(PlaceholderImageProperty);
+			set => SetValue(PlaceholderImageProperty, value);
+		}
 
-        #endregion
+		#endregion
 
-        #region PointerOverImage
+		#region PointerOverImage
 
-        public static readonly DependencyProperty PointerOverImageProperty =
-            DependencyProperty.Register(
-                nameof(PointerOverImage),
-                typeof(ImageSource),
-                typeof(RatingItemImageInfo),
-                null);
+		public static readonly DependencyProperty PointerOverImageProperty =
+			DependencyProperty.Register(
+				nameof(PointerOverImage),
+				typeof(ImageSource),
+				typeof(RatingItemImageInfo),
+				null);
 
-        public ImageSource PointerOverImage
-        {
-            get => (ImageSource)GetValue(PointerOverImageProperty);
-            set => SetValue(PointerOverImageProperty, value);
-        }
+		public ImageSource PointerOverImage
+		{
+			get => (ImageSource)GetValue(PointerOverImageProperty);
+			set => SetValue(PointerOverImageProperty, value);
+		}
 
-        #endregion
+		#endregion
 
-        #region PointerOverPlaceholderImage
+		#region PointerOverPlaceholderImage
 
-        public static readonly DependencyProperty PointerOverPlaceholderImageProperty =
-            DependencyProperty.Register(
-                nameof(PointerOverPlaceholderImage),
-                typeof(ImageSource),
-                typeof(RatingItemImageInfo),
-                null);
+		public static readonly DependencyProperty PointerOverPlaceholderImageProperty =
+			DependencyProperty.Register(
+				nameof(PointerOverPlaceholderImage),
+				typeof(ImageSource),
+				typeof(RatingItemImageInfo),
+				null);
 
-        public ImageSource PointerOverPlaceholderImage
-        {
-            get => (ImageSource)GetValue(PointerOverPlaceholderImageProperty);
-            set => SetValue(PointerOverPlaceholderImageProperty, value);
-        }
+		public ImageSource PointerOverPlaceholderImage
+		{
+			get => (ImageSource)GetValue(PointerOverPlaceholderImageProperty);
+			set => SetValue(PointerOverPlaceholderImageProperty, value);
+		}
 
-        #endregion
+		#endregion
 
-        #region UnsetImage
+		#region UnsetImage
 
-        public static readonly DependencyProperty UnsetImageProperty =
-            DependencyProperty.Register(
-                nameof(UnsetImage),
-                typeof(ImageSource),
-                typeof(RatingItemImageInfo),
-                null);
+		public static readonly DependencyProperty UnsetImageProperty =
+			DependencyProperty.Register(
+				nameof(UnsetImage),
+				typeof(ImageSource),
+				typeof(RatingItemImageInfo),
+				null);
 
-        public ImageSource UnsetImage
-        {
-            get => (ImageSource)GetValue(UnsetImageProperty);
-            set => SetValue(UnsetImageProperty, value);
-        }
+		public ImageSource UnsetImage
+		{
+			get => (ImageSource)GetValue(UnsetImageProperty);
+			set => SetValue(UnsetImageProperty, value);
+		}
 
-        #endregion
+		#endregion
 
-        protected override Freezable CreateInstanceCore()
-        {
-            return new RatingItemImageInfo();
-        }
-    }
+		protected override Freezable CreateInstanceCore()
+		{
+			return new RatingItemImageInfo();
+		}
+	}
 }

@@ -6,25 +6,25 @@ using System.Windows;
 
 namespace ModernWpf.Controls
 {
-    public sealed class ItemsRepeaterElementIndexChangedEventArgs : EventArgs
-    {
-        internal ItemsRepeaterElementIndexChangedEventArgs(
-            UIElement element,
-            int oldIndex,
-            int newIndex)
-        {
-            Update(element, oldIndex, newIndex);
-        }
+	public sealed class ItemsRepeaterElementIndexChangedEventArgs : EventArgs
+	{
+		internal ItemsRepeaterElementIndexChangedEventArgs(
+			UIElement element,
+			int oldIndex,
+			int newIndex)
+		{
+			Update(element, oldIndex, newIndex);
+		}
 
-        public UIElement Element { get; private set; }
-        public int OldIndex { get; private set; }
-        public int NewIndex { get; private set; }
+		public UIElement Element { get; private set; }
+		public int OldIndex { get; private set; }
+		public int NewIndex { get; private set; }
 
-        internal void Update(UIElement element, int oldIndex, int newIndex)
-        {
-            Element = element;
-            OldIndex = oldIndex;
-            NewIndex = newIndex;
-        }
-    }
+		internal void Update(UIElement element, int oldIndex, int newIndex)
+		{
+			Element = element;
+			OldIndex = oldIndex;
+			NewIndex = newIndex;
+		}
+	}
 }

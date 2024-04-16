@@ -6,9 +6,9 @@ using System.Windows.Controls;
 
 namespace ModernWpf.Controls
 {
-    internal static class VisualStateUtil
-    {
-        /*
+	internal static class VisualStateUtil
+	{
+		/*
         public static VisualStateGroup GetVisualStateGroup(FrameworkElement control, string groupName)
         {
             VisualStateGroup group = null;
@@ -25,40 +25,40 @@ namespace ModernWpf.Controls
         }
         */
 
-        public static void GoToStateIfGroupExists(Control control, string groupName, string stateName, bool useTransitions)
-        {
-            //var visualStateGroup = GetVisualStateGroup(control, groupName);
-            //if (visualStateGroup != null)
-            {
-                VisualStateManager.GoToState(control, stateName, useTransitions);
-            }
-        }
-    }
+		public static void GoToStateIfGroupExists(Control control, string groupName, string stateName, bool useTransitions)
+		{
+			//var visualStateGroup = GetVisualStateGroup(control, groupName);
+			//if (visualStateGroup != null)
+			{
+				VisualStateManager.GoToState(control, stateName, useTransitions);
+			}
+		}
+	}
 
-    internal static class LayoutUtils
-    {
-        public static double MeasureAndGetDesiredWidthFor(UIElement element, Size availableSize)
-        {
-            double desiredWidth = 0;
-            if (element != null)
-            {
-                element.Measure(availableSize);
-                desiredWidth = element.DesiredSize.Width;
-            }
-            return desiredWidth;
-        }
+	internal static class LayoutUtils
+	{
+		public static double MeasureAndGetDesiredWidthFor(UIElement element, Size availableSize)
+		{
+			double desiredWidth = 0;
+			if (element != null)
+			{
+				element.Measure(availableSize);
+				desiredWidth = element.DesiredSize.Width;
+			}
+			return desiredWidth;
+		}
 
-        public static double GetActualWidthFor(FrameworkElement element)
-        {
-            return (element != null ? element.ActualWidth : 0);
-        }
-    }
+		public static double GetActualWidthFor(FrameworkElement element)
+		{
+			return (element != null ? element.ActualWidth : 0);
+		}
+	}
 
-    internal static class Util
-    {
-        public static Visibility VisibilityFromBool(bool visible)
-        {
-            return visible ? Visibility.Visible : Visibility.Collapsed;
-        }
-    }
+	internal static class Util
+	{
+		public static Visibility VisibilityFromBool(bool visible)
+		{
+			return visible ? Visibility.Visible : Visibility.Collapsed;
+		}
+	}
 }

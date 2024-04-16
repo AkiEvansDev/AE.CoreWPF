@@ -5,35 +5,35 @@ using System;
 
 namespace ModernWpf.Controls
 {
-    public sealed class NavigationViewItemCollapsedEventArgs : EventArgs
-    {
-        internal NavigationViewItemCollapsedEventArgs(NavigationView navigationView)
-        {
-            m_navigationView = navigationView;
-        }
+	public sealed class NavigationViewItemCollapsedEventArgs : EventArgs
+	{
+		internal NavigationViewItemCollapsedEventArgs(NavigationView navigationView)
+		{
+			m_navigationView = navigationView;
+		}
 
-        public NavigationViewItemBase CollapsedItemContainer { get; internal set; }
+		public NavigationViewItemBase CollapsedItemContainer { get; internal set; }
 
-        public object CollapsedItem
-        {
-            get
-            {
-                if (m_collapsedItem != null)
-                {
-                    return m_collapsedItem;
-                }
+		public object CollapsedItem
+		{
+			get
+			{
+				if (m_collapsedItem != null)
+				{
+					return m_collapsedItem;
+				}
 
-                if (m_navigationView is { } nv)
-                {
-                    m_collapsedItem = nv.MenuItemFromContainer(CollapsedItemContainer);
-                    return m_collapsedItem;
-                }
+				if (m_navigationView is { } nv)
+				{
+					m_collapsedItem = nv.MenuItemFromContainer(CollapsedItemContainer);
+					return m_collapsedItem;
+				}
 
-                return null;
-            }
-        }
+				return null;
+			}
+		}
 
-        object m_collapsedItem;
-        NavigationView m_navigationView;
-    }
+		object m_collapsedItem;
+		NavigationView m_navigationView;
+	}
 }

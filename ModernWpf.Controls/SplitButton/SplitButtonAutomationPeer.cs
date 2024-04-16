@@ -4,95 +4,96 @@
 using System.Windows.Automation;
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
+
 using ModernWpf.Controls;
 
 namespace ModernWpf.Automation.Peers
 {
-    public class SplitButtonAutomationPeer : FrameworkElementAutomationPeer,
-        IExpandCollapseProvider,
-        IInvokeProvider
-    {
-        public SplitButtonAutomationPeer(SplitButton owner) : base(owner)
-        {
-        }
+	public class SplitButtonAutomationPeer : FrameworkElementAutomationPeer,
+		IExpandCollapseProvider,
+		IInvokeProvider
+	{
+		public SplitButtonAutomationPeer(SplitButton owner) : base(owner)
+		{
+		}
 
-        public override object GetPattern(PatternInterface patternInterface)
-        {
-            if (patternInterface == PatternInterface.ExpandCollapse ||
-                patternInterface == PatternInterface.Invoke)
-            {
-                return this;
-            }
+		public override object GetPattern(PatternInterface patternInterface)
+		{
+			if (patternInterface == PatternInterface.ExpandCollapse ||
+				patternInterface == PatternInterface.Invoke)
+			{
+				return this;
+			}
 
-            return base.GetPattern(patternInterface);
-        }
+			return base.GetPattern(patternInterface);
+		}
 
-        protected override string GetClassNameCore()
-        {
-            return nameof(SplitButton);
-        }
+		protected override string GetClassNameCore()
+		{
+			return nameof(SplitButton);
+		}
 
-        protected override AutomationControlType GetAutomationControlTypeCore()
-        {
-            return AutomationControlType.SplitButton;
-        }
+		protected override AutomationControlType GetAutomationControlTypeCore()
+		{
+			return AutomationControlType.SplitButton;
+		}
 
-        private SplitButton GetImpl()
-        {
-            SplitButton impl = null;
+		private SplitButton GetImpl()
+		{
+			SplitButton impl = null;
 
-            if (Owner is SplitButton splitButton)
-            {
-                impl = splitButton;
-            }
+			if (Owner is SplitButton splitButton)
+			{
+				impl = splitButton;
+			}
 
-            return impl;
-        }
+			return impl;
+		}
 
-        public ExpandCollapseState ExpandCollapseState
-        {
-            get
-            {
-                ExpandCollapseState currentState = ExpandCollapseState.Collapsed;
+		public ExpandCollapseState ExpandCollapseState
+		{
+			get
+			{
+				ExpandCollapseState currentState = ExpandCollapseState.Collapsed;
 
-                var splitButton = GetImpl();
-                if (splitButton != null)
-                {
-                    if (splitButton.IsFlyoutOpen)
-                    {
-                        currentState = ExpandCollapseState.Expanded;
-                    }
-                }
+				var splitButton = GetImpl();
+				if (splitButton != null)
+				{
+					if (splitButton.IsFlyoutOpen)
+					{
+						currentState = ExpandCollapseState.Expanded;
+					}
+				}
 
-                return currentState;
-            }
-        }
+				return currentState;
+			}
+		}
 
-        public void Expand()
-        {
-            var splitButton = GetImpl();
-            if (splitButton != null)
-            {
-                splitButton.OpenFlyout();
-            }
-        }
+		public void Expand()
+		{
+			var splitButton = GetImpl();
+			if (splitButton != null)
+			{
+				splitButton.OpenFlyout();
+			}
+		}
 
-        public void Collapse()
-        {
-            var splitButton = GetImpl();
-            if (splitButton != null)
-            {
-                splitButton.CloseFlyout();
-            }
-        }
+		public void Collapse()
+		{
+			var splitButton = GetImpl();
+			if (splitButton != null)
+			{
+				splitButton.CloseFlyout();
+			}
+		}
 
-        public void Invoke()
-        {
-            var splitButton = GetImpl();
-            if (splitButton != null)
-            {
-                splitButton.OnClickPrimary(null, null);
-            }
-        }
-    }
+		public void Invoke()
+		{
+			var splitButton = GetImpl();
+			if (splitButton != null)
+			{
+				splitButton.OnClickPrimary(null, null);
+			}
+		}
+	}
 }

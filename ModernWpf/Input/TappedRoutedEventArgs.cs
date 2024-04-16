@@ -2,16 +2,16 @@
 
 namespace ModernWpf.Input
 {
-    internal sealed class TappedRoutedEventArgs : RoutedEventArgs
-    {
-        public TappedRoutedEventArgs()
-        {
-        }
+	internal sealed class TappedRoutedEventArgs : RoutedEventArgs
+	{
+		public TappedRoutedEventArgs()
+		{
+		}
 
-        //public Point GetPosition(UIElement relativeTo);
+		//public Point GetPosition(UIElement relativeTo);
 
-        //public PointerDeviceType PointerDeviceType { get; }
+		//public PointerDeviceType PointerDeviceType { get; }
 
-        internal int Timestamp { get; set; }
-    }
+		internal int Timestamp { get; set; }
+	}
 }

@@ -4,78 +4,79 @@
 using System.Windows;
 using System.Windows.Automation;
 using System.Windows.Automation.Peers;
+
 using ModernWpf.Automation.Peers;
 
 namespace ModernWpf.Controls
 {
-    public class ToggleSplitButton : SplitButton
-    {
-        public ToggleSplitButton()
-        {
-        }
+	public class ToggleSplitButton : SplitButton
+	{
+		public ToggleSplitButton()
+		{
+		}
 
-        #region IsChecked
+		#region IsChecked
 
-        public static readonly DependencyProperty IsCheckedProperty =
-            DependencyProperty.Register(
-                nameof(IsChecked),
-                typeof(bool),
-                typeof(ToggleSplitButton),
-                new FrameworkPropertyMetadata(
-                    false,
-                    FrameworkPropertyMetadataOptions.BindsTwoWayByDefault | FrameworkPropertyMetadataOptions.Journal,
-                    OnIsCheckedPropertyChanged));
+		public static readonly DependencyProperty IsCheckedProperty =
+			DependencyProperty.Register(
+				nameof(IsChecked),
+				typeof(bool),
+				typeof(ToggleSplitButton),
+				new FrameworkPropertyMetadata(
+					false,
+					FrameworkPropertyMetadataOptions.BindsTwoWayByDefault | FrameworkPropertyMetadataOptions.Journal,
+					OnIsCheckedPropertyChanged));
 
-        public bool IsChecked
-        {
-            get => (bool)GetValue(IsCheckedProperty);
-            set => SetValue(IsCheckedProperty, value);
-        }
+		public bool IsChecked
+		{
+			get => (bool)GetValue(IsCheckedProperty);
+			set => SetValue(IsCheckedProperty, value);
+		}
 
-        private static void OnIsCheckedPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            ((ToggleSplitButton)d).OnIsCheckedChanged();
-        }
+		private static void OnIsCheckedPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		{
+			((ToggleSplitButton)d).OnIsCheckedChanged();
+		}
 
-        #endregion
+		#endregion
 
-        public event TypedEventHandler<ToggleSplitButton, ToggleSplitButtonIsCheckedChangedEventArgs> IsCheckedChanged;
+		public event TypedEventHandler<ToggleSplitButton, ToggleSplitButtonIsCheckedChangedEventArgs> IsCheckedChanged;
 
-        protected override AutomationPeer OnCreateAutomationPeer()
-        {
-            return new ToggleSplitButtonAutomationPeer(this);
-        }
+		protected override AutomationPeer OnCreateAutomationPeer()
+		{
+			return new ToggleSplitButtonAutomationPeer(this);
+		}
 
-        private void OnIsCheckedChanged()
-        {
-            if (m_hasLoaded)
-            {
-                IsCheckedChanged?.Invoke(this, new ToggleSplitButtonIsCheckedChangedEventArgs());
+		private void OnIsCheckedChanged()
+		{
+			if (m_hasLoaded)
+			{
+				IsCheckedChanged?.Invoke(this, new ToggleSplitButtonIsCheckedChangedEventArgs());
 
-                var peer = FrameworkElementAutomationPeer.FromElement(this);
-                if (peer != null)
-                {
-                    var newValue = IsChecked ? ToggleState.On : ToggleState.Off;
-                    var oldValue = (newValue == ToggleState.On) ? ToggleState.Off : ToggleState.On;
-                    peer.RaisePropertyChangedEvent(TogglePatternIdentifiers.ToggleStateProperty, oldValue, newValue);
-                }
-            }
+				var peer = FrameworkElementAutomationPeer.FromElement(this);
+				if (peer != null)
+				{
+					var newValue = IsChecked ? ToggleState.On : ToggleState.Off;
+					var oldValue = (newValue == ToggleState.On) ? ToggleState.Off : ToggleState.On;
+					peer.RaisePropertyChangedEvent(TogglePatternIdentifiers.ToggleStateProperty, oldValue, newValue);
+				}
+			}
 
-            UpdateVisualStates();
-        }
+			UpdateVisualStates();
+		}
 
-        internal override void OnClickPrimary(object sender, RoutedEventArgs e)
-        {
-            Toggle();
+		internal override void OnClickPrimary(object sender, RoutedEventArgs e)
+		{
+			Toggle();
 
-            base.OnClickPrimary(sender, e);
-        }
+			base.OnClickPrimary(sender, e);
+		}
 
-        internal override bool InternalIsChecked => IsChecked;
+		internal override bool InternalIsChecked => IsChecked;
 
-        internal void Toggle()
-        {
-            SetCurrentValue(IsCheckedProperty, !IsChecked);
-        }
-    }
+		internal void Toggle()
+		{
+			SetCurrentValue(IsCheckedProperty, !IsChecked);
+		}
+	}
 }

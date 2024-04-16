@@ -2,16 +2,16 @@
 
 namespace ModernWpf.Controls
 {
-    internal sealed class FlyoutBaseClosingEventArgs : EventArgs
-    {
-        internal FlyoutBaseClosingEventArgs()
-        {
-        }
+	internal sealed class FlyoutBaseClosingEventArgs : EventArgs
+	{
+		internal FlyoutBaseClosingEventArgs()
+		{
+		}
 
-        public bool Cancel
-        {
-            get => false;
-            set => throw new NotImplementedException();
-        }
-    }
+		public bool Cancel
+		{
+			get => false;
+			set => throw new NotImplementedException();
+		}
+	}
 }
