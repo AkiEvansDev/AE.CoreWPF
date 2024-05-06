@@ -223,6 +223,18 @@ public class DisplaySettings : IDisplaySettings
 	}
 	public Brush SuccessColorBrush { get; private set; }
 
+	private Color closeColor;
+	public Color CloseColor
+	{
+		get => closeColor;
+		set
+		{
+			closeColor = value;
+			CloseColorBrush = value.ToBrush();
+		}
+	}
+	public Brush CloseColorBrush { get; private set; }
+
 	public FontFamily FontFamily { get; set; }
 	public FontFamily FontFamilyBold { get; set; }
 	public FontFamily FontFamilyMedium { get; set; }
@@ -242,13 +254,17 @@ public class DisplaySettings : IDisplaySettings
 
 	public double ControlOpacity { get; set; } = 1;
 	public double ControlSecondaryOpacity { get; set; } = 0.8;
+	public double ControlDisabledOpacity { get; set; } = 0.2;
 
-	public double FontSize { get; set; } = 15;//= 14;
-	public double FontSizeCompact { get; set; } = 13;//= 12.8;
+	public double FontSize { get; set; } = 15;
+	public double FontSizeCompact { get; set; } = 13;
+	public double FontSizeCompact2 { get; set; } = 14;
 
 	public byte ColorOpacity1 { get; set; } = 200;
 	public byte ColorOpacity2 { get; set; } = 100;
 	public byte ColorOpacity3 { get; set; } = 50;
+	public byte ColorOpacity4 { get; set; } = 20;
+	public byte ColorOpacity5 { get; set; } = 10;
 
 	public string NamePattern { get; set; } = "^[a-zA-Z][a-zA-Z0-9 #]*$";
 	public string TextPattern { get; set; } = "^[a-zA-Zа-яА-Я0-9 #.,!?&@%$()\\[\\]_\\-+/*=<>]*$";
@@ -257,11 +273,13 @@ public class DisplaySettings : IDisplaySettings
 	public string IntegerPattern { get; set; } = "^[0-9-][0-9]*$";
 	public string DoublePattern { get; set; } = "^[0-9-][0-9.]*$";
 
-	public DisplaySettings(double border, double space, double round, ColorPath background, ColorPath secondaryBackground, ColorPath tertiaryBackground, ColorPath foreground, ColorPath secondaryForeground, ColorPath tertiaryForeground, ColorPath accent, ColorPath stroke, ColorPath messageColor, ColorPath warningColor, ColorPath errorColor, ColorPath successColor, string font = ChakraPetchFont, byte colorOpacity1 = 200, byte colorOpacity2 = 100, byte colorOpacity3 = 50)
+	public DisplaySettings(double border, double space, double round, ColorPath background, ColorPath secondaryBackground, ColorPath tertiaryBackground, ColorPath foreground, ColorPath secondaryForeground, ColorPath tertiaryForeground, ColorPath accent, ColorPath stroke, ColorPath messageColor, ColorPath warningColor, ColorPath errorColor, ColorPath successColor, string font = ChakraPetchFont, byte colorOpacity1 = 200, byte colorOpacity2 = 100, byte colorOpacity3 = 50, byte colorOpacity4 = 20, byte colorOpacity5 = 10)
 	{
 		ColorOpacity1 = colorOpacity1;
 		ColorOpacity2 = colorOpacity2;
 		ColorOpacity3 = colorOpacity3;
+		ColorOpacity4 = colorOpacity4;
+		ColorOpacity5 = colorOpacity5;
 
 		Border = border;
 		Space = space;
@@ -287,6 +305,8 @@ public class DisplaySettings : IDisplaySettings
 		ErrorColor = errorColor.ToColor().ToColor();
 		SuccessColor = successColor.ToColor().ToColor();
 
+		CloseColor = new ColorPath(ColorKey.CrimsonRed, ColorType.Shade, 1).ToColor().ToColor();
+
 		var path = Path.Combine(
 			Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase),
 			"Fonts"
@@ -308,8 +328,8 @@ public class DisplaySettings : IDisplaySettings
 			new ColorPath(ColorKey.SilverNight, ColorType.Shade, 9),
 			new ColorPath(ColorKey.SilverNight, ColorType.Shade, 8),
 			new ColorPath(ColorKey.SilverNight, ColorType.Tint, 10, 200),
-			new ColorPath(ColorKey.SilverNight, ColorType.Tint, 8, 200),
-			new ColorPath(ColorKey.SilverNight, ColorType.Tint, 8, 100),
+			new ColorPath(ColorKey.SilverNight, ColorType.Tint, 2, 200),
+			new ColorPath(ColorKey.SilverNight, ColorType.Shade, 2, 200),
 			accent ?? new ColorPath(ColorKey.PaleViolet, ColorType.Shade, 4),
 			new ColorPath(ColorKey.SilverNight, ColorType.Shade, 7, 200),
 			new ColorPath(ColorKey.BlueEyes, ColorType.Tint, 2),
@@ -329,8 +349,8 @@ public class DisplaySettings : IDisplaySettings
 			new ColorPath(mainKey, ColorType.Shade, mainKey == ColorKey.SilverNight ? 9 : 8),
 			new ColorPath(mainKey, ColorType.Shade, mainKey == ColorKey.SilverNight ? 8 : 7),
 			new ColorPath(mainKey, ColorType.Tint, mainKey == ColorKey.SilverNight ? 10 : 9, 200),
-			new ColorPath(mainKey, ColorType.Tint, mainKey == ColorKey.SilverNight ? 8 : 7, 200),
-			new ColorPath(mainKey, ColorType.Tint, mainKey == ColorKey.SilverNight ? 8 : 7, 100),
+			new ColorPath(mainKey, ColorType.Tint, mainKey == ColorKey.SilverNight ? 2 : 6, 200),
+			new ColorPath(mainKey, ColorType.Shade, mainKey == ColorKey.SilverNight ? 2 : 6, 200),
 			new ColorPath(accentKey, ColorType.Shade, 4),
 			new ColorPath(mainKey, ColorType.Shade, mainKey == ColorKey.SilverNight ? 7 : 6, 200),
 			new ColorPath(ColorKey.BlueEyes, ColorType.Tint, 2),

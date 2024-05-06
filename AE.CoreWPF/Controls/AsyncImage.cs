@@ -13,7 +13,7 @@ public class AsyncImage : Image
 	public static readonly DependencyProperty ImagePathProperty =
 		DependencyProperty.Register(nameof(ImagePath), typeof(string), typeof(AsyncImage), new PropertyMetadata(async (o, e) => await ((AsyncImage)o).LoadImageAsync((string)e.NewValue)));
 
-	public event AsyncImageLoadEventHandler OnImageLoad;
+	public event AsyncImageLoadEventHandler ImageLoad;
 
 	public string ImagePath
 	{
@@ -43,6 +43,6 @@ public class AsyncImage : Image
 
 			return bi;
 		});
-		OnImageLoad?.Invoke(this);
+		ImageLoad?.Invoke(this);
 	}
 }

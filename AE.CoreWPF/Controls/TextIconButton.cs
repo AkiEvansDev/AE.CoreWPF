@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Media;
 
 using ModernWpf.Controls;
@@ -98,8 +97,8 @@ public class TextIconButton : Button
 			SnapsToDevicePixels = true,
 		};
 
-		textBlock = DisplayHelper.CreateTextBlock(text, size / 2);
-		textBlock.Padding = new Thickness(DisplayHelper.Settings.Space, 0, DisplayHelper.Settings.Space, 0);
+		textBlock = DisplayHelper.CreateTextBlock(text, size / 2)
+			.SetTextPadding(DisplayHelper.Settings.Space, 0);
 
 		panel.Children.Add(icon);
 		panel.Children.Add(textBlock);

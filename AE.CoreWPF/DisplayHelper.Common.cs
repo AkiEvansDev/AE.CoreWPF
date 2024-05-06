@@ -30,7 +30,7 @@ public static partial class DisplayHelper
 		Resource = resourceManager;
 
 		ThemeManager.Current.AccentColor = Settings.Accent;
-		
+
 		application.Resources.Add("SystemControlPageBackgroundAltHighBrush", Settings.SecondaryBackgroundBrush);
 		application.Resources.Add("SystemControlPageTextBaseHighBrush", Settings.ForegroundBrush);
 		application.Resources.Add("WindowBorder", Settings.StrokeBrush);
@@ -165,8 +165,8 @@ public static partial class DisplayHelper
 		application.Resources.Add("ButtonBorderBrushPressed", Settings.TertiaryBackground.WithAlpha(Settings.ColorOpacity2).ToBrush());
 		application.Resources.Add("ButtonBorderBrushDisabled", Settings.TertiaryForegroundBrush);
 
-		application.Resources.Add("CloseButtonBackgroundPointerOver", Settings.ErrorColorBrush);
-		application.Resources.Add("CloseButtonBackgroundPressed", Settings.ErrorColor.WithAlpha(Settings.ColorOpacity2).ToBrush());
+		application.Resources.Add("CloseButtonBackgroundPointerOver", Settings.CloseColorBrush);
+		application.Resources.Add("CloseButtonBackgroundPressed", Settings.CloseColor.WithAlpha(Settings.ColorOpacity1).ToBrush());
 
 		#endregion
 		#region Scroll
@@ -190,19 +190,29 @@ public static partial class DisplayHelper
 
 		#endregion
 		#region Menu
-
+		
+		application.Resources.Add("MenuBarHeight", Settings.ControlSizeCompact2);
 		application.Resources.Add("MenuFlyoutThemeMinHeight", 0.0);
-		application.Resources.Add("MenuFlyoutPresenterThemePadding", new Thickness(Settings.MinSpace));
+
+		application.Resources.Add("MenuFlyoutPresenterThemePadding", new Thickness(Settings.Space, Settings.MinSpace, Settings.Space, Settings.MinSpace));
 		application.Resources.Add("MenuFlyoutSeparatorThemePadding", new Thickness(Settings.Space, Settings.MinSpace, Settings.Space, Settings.MinSpace));
-		application.Resources.Add("OverlayCornerRadius", new CornerRadius(Settings.MinRound));
+		application.Resources.Add("MenuFlyoutPresenterBorderThemeThickness", new Thickness(Settings.MinBorder, Settings.MinBorder, Settings.MinBorder, Settings.MinBorder));
+		application.Resources.Add("OverlayCornerRadius", new CornerRadius(0));
 
 		application.Resources.Add("MenuFlyoutSeparatorBackground", Settings.StrokeBrush);
 		application.Resources.Add("MenuFlyoutPresenterBackground", Settings.TertiaryBackgroundBrush);
-		application.Resources.Add("MenuFlyoutPresenterBorderBrush", Settings.TertiaryBackgroundBrush);
+		application.Resources.Add("MenuFlyoutPresenterBorderBrush", Settings.StrokeBrush);
 
-		application.Resources.Add("MenuBarItemBackgroundPointerOver", Settings.TertiaryBackgroundBrush);
+		application.Resources.Add("MenuBarItemBackgroundPointerOver", Settings.SelectBackgroundBrush);
+		application.Resources.Add("MenuFlyoutItemBackgroundPointerOver", Settings.Foreground.WithAlpha(Settings.ColorOpacity5).ToBrush());
+
 		application.Resources.Add("MenuBarItemBackgroundSelected", Settings.TertiaryBackgroundBrush);
+
 		application.Resources.Add("MenuBarItemBackgroundPressed", Settings.TertiaryBackgroundBrush);
+		application.Resources.Add("MenuFlyoutItemBackgroundPressed", Settings.Foreground.WithAlpha(Settings.ColorOpacity4).ToBrush());
+
+		application.Resources.Add("MenuBarItemBorderBrushPointerOver", Settings.TransperentBrush);
+		application.Resources.Add("MenuBarItemBorderBrushSelected", Settings.StrokeBrush);
 
 		application.Resources.Add("FlyoutPresenterBackground", Settings.TertiaryBackgroundBrush);
 		application.Resources.Add("FlyoutBorderThemeBrush", Settings.TertiaryBackgroundBrush);

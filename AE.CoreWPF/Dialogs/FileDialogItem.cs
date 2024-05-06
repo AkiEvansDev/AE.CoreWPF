@@ -32,6 +32,7 @@ public class FileDialogItem : Grid
 	private readonly Action<FileDialogItem> onSelect;
 	private readonly Action<FileDialogItem> onOpen;
 
+	public bool IsFile { get; }
 	public bool IsFolder { get; }
 	public bool IsDrive { get; }
 	public bool IsKnown { get; }
@@ -39,10 +40,17 @@ public class FileDialogItem : Grid
 	public string DisplayName { get; }
 	public string FullName { get; }
 
-	public bool IsSelected
+	public bool ViewSelected
 	{
 		get => border.Opacity == 1;
 		set => border.Opacity = value ? 1 : 0;
+	}
+
+	private bool isSelected;
+	public bool IsSelected
+	{
+		get => isSelected;
+		set => isSelected = ViewSelected = value;
 	}
 
 	private Border border;
@@ -55,6 +63,7 @@ public class FileDialogItem : Grid
 
 	public FileDialogItem(DriveInfo drive, Action<FileDialogItem> select, Action<FileDialogItem> open = null) : this(select, open)
 	{
+		IsFile = false;
 		IsFolder = false;
 		IsDrive = true;
 		IsKnown = false;
@@ -67,6 +76,7 @@ public class FileDialogItem : Grid
 
 	public FileDialogItem(FileDialogItemType type, string path, bool isFolder, Action<FileDialogItem> select, Action<FileDialogItem> open = null) : this(select, open)
 	{
+		IsFile = !isFolder;
 		IsFolder = isFolder;
 		IsDrive = false;
 		IsKnown = isFolder && FileDialog.KnownFolders.Contains(path);
@@ -161,7 +171,7 @@ public class FileDialogItem : Grid
 				};
 
 				namePanel.Children.Add(loading);
-				(image as AsyncImage).OnImageLoad += (s) => namePanel.Children.Remove(loading);
+				(image as AsyncImage).ImageLoad += (s) => namePanel.Children.Remove(loading);
 			}
 			else
 			{

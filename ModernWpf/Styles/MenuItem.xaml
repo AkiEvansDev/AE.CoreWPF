@@ -17,6 +17,9 @@
     <Thickness x:Key="MenuFlyoutSubItemRevealBorderThickness">1</Thickness>
 
     <primitives:SharedSizeGroupConverter x:Key="SharedSizeGroupConverter" />
+    <primitives:MenuItemHeightConverter x:Key="MenuItemHeightConverter" />
+    <primitives:MenuItemMarginConverter x:Key="MenuItemMarginConverter" />
+    <primitives:MenuItemBorderConverter x:Key="MenuItemBorderConverter" />
 
     <Style x:Key="{ComponentResourceKey TypeInTargetAssembly={x:Type FrameworkElement}, ResourceId=MenuScrollViewer}" TargetType="ScrollViewer">
         <Setter Property="HorizontalScrollBarVisibility" Value="Disabled" />
@@ -123,6 +126,15 @@
                                 BorderBrush="{DynamicResource MenuFlyoutPresenterBorderBrush}"
                                 BorderThickness="{DynamicResource MenuFlyoutPresenterBorderThemeThickness}"
                                 CornerRadius="{TemplateBinding primitives:ControlHelper.CornerRadius}" />
+                            <Border
+                                Background="{DynamicResource MenuFlyoutPresenterBackground}"
+                                BorderBrush="{DynamicResource MenuFlyoutPresenterBorderBrush}"
+                                Width="{Binding ActualWidth, ElementName=Background}"
+                                Height="{Binding BorderThickness, ElementName=SubMenuBorder, Converter={StaticResource MenuItemHeightConverter}}"
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Left"
+                                Margin="{Binding BorderThickness, ElementName=SubMenuBorder, Converter={StaticResource MenuItemMarginConverter}}"
+                                BorderThickness="{Binding BorderThickness, ElementName=SubMenuBorder, Converter={StaticResource MenuItemBorderConverter}}"/>
                         </Grid>
                     </Border>
                 </primitives:ThemeShadowChrome>

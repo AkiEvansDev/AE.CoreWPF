@@ -13,6 +13,8 @@ using DColor = System.Drawing.Color;
 
 namespace AE.CoreWPF.Controls;
 
+public delegate void ColorChangedEventHandler(ColorPicker sender, Color color);
+
 public partial class ColorPicker : UserControl
 {
 	private const double hH = 255;
@@ -21,10 +23,7 @@ public partial class ColorPicker : UserControl
 	private const double svH = 200;
 	private const double svV = 100;
 
-	public delegate void ColorChangedDelegate(ColorPicker sender, Color color);
-	public delegate void OpacityColorChangedDelegate(ColorPicker sender, Color opacityColor);
-
-	public event ColorChangedDelegate SelectColorChanged;
+	public event ColorChangedEventHandler SelectColorChanged;
 
 	public static readonly DependencyProperty SelectColorProperty =
 		DependencyProperty.Register(nameof(SelectColor), typeof(Color), typeof(ColorPicker), new PropertyMetadata(Color.FromArgb(255, 255, 0, 0), OnSelectColorChanged));

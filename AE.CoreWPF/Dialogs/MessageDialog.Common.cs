@@ -8,8 +8,6 @@ namespace AE.CoreWPF.Dialogs;
 
 public partial class MessageDialog : Window
 {
-	private bool? result = null;
-
 	private MessageDialog(string message, string ok, string cancel, string close, bool showIcon)
 	{
 		Layout(message, ok, cancel, close, showIcon);
@@ -34,22 +32,13 @@ public partial class MessageDialog : Window
 
 		grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
 		grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(DisplayHelper.Settings.ControlSizeCompact2 + DisplayHelper.Settings.MaxSpace, GridUnitType.Pixel) });
-		
-		var scroll = new ScrollViewerEx
-		{
-			BorderBrush = DisplayHelper.Settings.StrokeBrush,
-			HorizontalAlignment = HorizontalAlignment.Stretch,
-			VerticalAlignment = VerticalAlignment.Stretch,
-			Margin = new Thickness(0),
-			Padding = new Thickness(0),
-			BorderThickness = new Thickness(0),
-			HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled,
-			VerticalScrollBarVisibility = ScrollBarVisibility.Hidden,
-		};
 
-		var textBlock = DisplayHelper.CreateTextBlock(message);
+		var scroll = DisplayHelper.CreateScroll(ScrollBarVisibility.Disabled);
+
+		var textBlock = DisplayHelper.CreateTextBlock(message)
+			.SetTextPadding(DisplayHelper.Settings.MaxSpace, DisplayHelper.Settings.MinSpace, DisplayHelper.Settings.MaxSpace, DisplayHelper.Settings.MaxSpace);
+		
 		textBlock.MaxWidth = Width;
-		textBlock.Padding = new Thickness(DisplayHelper.Settings.MaxSpace, DisplayHelper.Settings.MinSpace, DisplayHelper.Settings.MaxSpace, DisplayHelper.Settings.MaxSpace);
 		textBlock.TextWrapping = TextWrapping.Wrap;
 
 		scroll.Content = textBlock;
@@ -94,13 +83,13 @@ public partial class MessageDialog : Window
 
 			okBtn.Click += (s, e) =>
 			{
-				result = true;
+				DialogResult = true;
 				Close();
 			};
 
 			if (close != null)
 				actionPanel1.Children.Add(okBtn);
-			else 
+			else
 				actionPanel2.Children.Add(okBtn);
 		}
 
@@ -110,7 +99,7 @@ public partial class MessageDialog : Window
 
 			cancelBtn.Click += (s, e) =>
 			{
-				result = false;
+				DialogResult = false;
 				Close();
 			};
 

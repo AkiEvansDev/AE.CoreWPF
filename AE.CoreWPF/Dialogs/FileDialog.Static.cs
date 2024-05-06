@@ -2,7 +2,7 @@
 
 namespace AE.CoreWPF.Dialogs;
 
-public partial class FileDialog : Window
+public partial class FileDialog
 {
 	internal static string[] KnownFolders { get; }
 	internal static string[] ImageExtensions { get; } = new[]

@@ -145,20 +145,11 @@ public partial class FileDialog : Window
 		topActionPanel.Children.Add(forward);
 		topActionPanel.Children.Add(refresh);
 
-		navigatePath = DisplayHelper.CreateTextBoxVariant(DisplayHelper.Settings.ControlSizeCompact2, fontSize: DisplayHelper.Settings.FontSizeCompact, pattern: DisplayHelper.Settings.PathPattern);
-		navigatePath.Margin = new Thickness(0, DisplayHelper.Settings.Space, DisplayHelper.Settings.Space, DisplayHelper.Settings.Space);
+		navigatePath = DisplayHelper.CreateTextBoxVariant(DisplayHelper.Settings.ControlSizeCompact2, fontSize: DisplayHelper.Settings.FontSizeCompact, pattern: DisplayHelper.Settings.PathPattern)
+			.SetMargin(0, DisplayHelper.Settings.Space, DisplayHelper.Settings.Space, DisplayHelper.Settings.Space);
 
-		defaultScroll = new ScrollViewerEx
-		{
-			BorderBrush = DisplayHelper.Settings.StrokeBrush,
-			HorizontalAlignment = HorizontalAlignment.Stretch,
-			VerticalAlignment = VerticalAlignment.Stretch,
-			Margin = new Thickness(0),
-			Padding = new Thickness(0),
-			BorderThickness = new Thickness(0, 0, DisplayHelper.Settings.Border, 0),
-			HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
-			VerticalScrollBarVisibility = ScrollBarVisibility.Hidden,
-		};
+		defaultScroll = DisplayHelper.CreateScroll(ScrollBarVisibility.Auto)
+			.SetBorder(0, 0, DisplayHelper.Settings.Border, 0);
 
 		defaultPanel = new SimpleStackPanel
 		{
@@ -168,17 +159,7 @@ public partial class FileDialog : Window
 
 		defaultScroll.Content = defaultPanel;
 
-		scroll = new ScrollViewerEx
-		{
-			BorderBrush = DisplayHelper.Settings.StrokeBrush,
-			HorizontalAlignment = HorizontalAlignment.Stretch,
-			VerticalAlignment = VerticalAlignment.Stretch,
-			Margin = new Thickness(0),
-			Padding = new Thickness(0),
-			BorderThickness = new Thickness(0),
-			HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
-			VerticalScrollBarVisibility = ScrollBarVisibility.Hidden,
-		};
+		scroll = DisplayHelper.CreateScroll(ScrollBarVisibility.Auto);
 
 		panel = new SimpleStackPanel
 		{
@@ -206,8 +187,9 @@ public partial class FileDialog : Window
 			BorderThickness = new Thickness(0),
 		};
 
-		inputPath = DisplayHelper.CreateTextBoxVariant(DisplayHelper.Settings.ControlSizeCompact2, fontSize: DisplayHelper.Settings.FontSizeCompact, pattern: DisplayHelper.Settings.PathPattern);
-		inputPath.Margin = new Thickness(0, DisplayHelper.Settings.Space, DisplayHelper.Settings.MaxSpace, DisplayHelper.Settings.Space);
+		inputPath = DisplayHelper.CreateTextBoxVariant(DisplayHelper.Settings.ControlSizeCompact2, fontSize: DisplayHelper.Settings.FontSizeCompact, pattern: DisplayHelper.Settings.PathPattern)
+			.SetMargin(0, DisplayHelper.Settings.Space, DisplayHelper.Settings.MaxSpace, DisplayHelper.Settings.Space);
+
 		inputPath.IsReadOnly = true;
 
 		var actionPanel = new SimpleStackPanel
@@ -224,8 +206,8 @@ public partial class FileDialog : Window
 		select.Click += (s, e) =>
 		{
 			result = string.IsNullOrEmpty(inputPath.Text) ? null : inputPath.Text;
-			Close(); 
-		};			
+			Close();
+		};
 		cancel.Click += (s, e) => Close();
 
 		actionPanel.Children.Add(select);
@@ -352,10 +334,12 @@ public partial class FileDialog : Window
 			items = Array.Empty<FileDialogItem>();
 
 		if (CanSelectFile)
+		{
 			items = items.Concat(files
 				.OrderBy(p => Path.GetFileName(p))
 				.Select(p => new FileDialogItem(type, p, false, OnSelect))
 			).ToList();
+		}
 
 		if (type == FileDialogItemType.Line)
 		{
@@ -369,6 +353,9 @@ public partial class FileDialog : Window
 
 		scroll.Content = type == FileDialogItemType.Line ? panel : previewPanel;
 		scroll.HorizontalScrollBarVisibility = type == FileDialogItemType.Line ? ScrollBarVisibility.Auto : ScrollBarVisibility.Disabled;
+
+		SourceFocus();
+		scroll.ScrollToVerticalOffset(0);
 
 		(scroll.Content as FrameworkElement).Loaded += OnContentLoaded;
 	}
@@ -398,22 +385,27 @@ public partial class FileDialog : Window
 			return;
 		}
 
-		foreach (var item in Items)
-			item.IsSelected = false;
-
-		selectItem.IsSelected = true;
-		ScrollTo(selectItem);
-
-		if ((selectItem.IsFolder && !CanSelectFolder) || (!selectItem.IsFolder && !CanSelectFile))
+		if ((selectItem.IsFolder && !CanSelectFolder) || (selectItem.IsFile && !CanSelectFile))
 		{
-			select.IsEnabled = false;
-			inputPath.Text = "";
+			if (CanSelectFolder)
+				inputPath.Text = OpenPath;
+
+			select.IsEnabled = !string.IsNullOrEmpty(inputPath.Text);
 		}
 		else
 		{
 			inputPath.Text = selectItem.FullName;
 			select.IsEnabled = true;
 		}
+
+		foreach (var item in Items)
+		{
+			item.IsSelected = false;
+			item.ViewSelected = item.FullName == inputPath.Text;
+		}
+
+		selectItem.IsSelected = true;
+		ScrollTo(selectItem);
 	}
 
 	private void OnOpen(FileDialogItem openItem)
@@ -428,7 +420,12 @@ public partial class FileDialog : Window
 
 	private void OnNavigateKeyDown(object sender, KeyEventArgs e)
 	{
-		if (e.Key == Key.Enter)
+		if (e.Key == Key.Escape)
+		{
+			navigatePath.Text = OpenPath;
+			SourceFocus();
+		}
+		else if (e.Key == Key.Enter)
 			Navigate();
 	}
 

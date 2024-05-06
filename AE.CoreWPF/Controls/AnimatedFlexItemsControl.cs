@@ -23,7 +23,7 @@ public class AnimatedFlexItemsControl : FlexItemsControl
 	public AnimatedFlexItemsControl()
 	{
 		AnimationManager = new AnimationManager(MarginProperty);
-		AnimationManager.OnCompleted += OnAnimationManagerCompleted;
+		AnimationManager.Completed += OnAnimationManagerCompleted;
 	}
 
 	private void OnAnimationManagerCompleted(object sender, EventArgs eventArgs)

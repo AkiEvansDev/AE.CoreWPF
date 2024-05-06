@@ -27,8 +27,6 @@ public partial class MessageDialog
 			Title = string.IsNullOrEmpty(title) ? "" : DisplayHelper.GetText(title),
 		};
 
-		dialog.ShowDialog();
-
-		return dialog.result;
+		return dialog.ShowDialog();
 	}
 }

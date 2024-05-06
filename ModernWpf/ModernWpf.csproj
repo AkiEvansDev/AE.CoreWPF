@@ -4,6 +4,7 @@
     <TargetFrameworks>net6.0-windows7.0</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <NeutralLanguage>en-US</NeutralLanguage>
+	<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
     <NoWarn>1701;1702;1573;1591</NoWarn>
   </PropertyGroup>
 

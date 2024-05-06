@@ -58,6 +58,9 @@ public interface IDisplaySettings
 	Color SuccessColor { get; }
 	Brush SuccessColorBrush { get; }
 
+	Color CloseColor { get; }
+	Brush CloseColorBrush { get; }
+
 	FontFamily FontFamily { get; }
 	FontFamily FontFamilyBold { get; }
 	FontFamily FontFamilyMedium { get; }
@@ -77,13 +80,17 @@ public interface IDisplaySettings
 
 	double ControlOpacity { get; }
 	double ControlSecondaryOpacity { get; }
+	double ControlDisabledOpacity { get; }
 
 	double FontSize { get; }
 	double FontSizeCompact { get; }
+	double FontSizeCompact2 { get; }
 
 	byte ColorOpacity1 { get; }
 	byte ColorOpacity2 { get; }
 	byte ColorOpacity3 { get; }
+	byte ColorOpacity4 { get; }
+	byte ColorOpacity5 { get; }
 
 	string NamePattern { get; }
 	string TextPattern { get; }

@@ -22,7 +22,7 @@ public class AnimationItem
 
 public class AnimationManager
 {
-	public event EventHandler OnCompleted;
+	public event EventHandler Completed;
 
 	private readonly DependencyProperty AnimationProperty;
 	private readonly List<AnimationItem> ActiveAnimations;
@@ -82,7 +82,7 @@ public class AnimationManager
 		{
 			ActiveAnimations.Remove(animationItem);
 			if (!ActiveAnimations.Any())
-				OnCompleted?.Invoke(null, EventArgs.Empty);
+				Completed?.Invoke(null, EventArgs.Empty);
 		};
 	}
 }

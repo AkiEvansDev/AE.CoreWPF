@@ -5,7 +5,7 @@
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
     <UseWPF>true</UseWPF>
 	  
-    <Version>3.3.0</Version>
+    <Version>3.3.1</Version>
 	<Title>AE.CoreWPF</Title>
 	<Description>AE.CoreWPF</Description>
     <Authors>AkiEvans</Authors>
@@ -15,6 +15,9 @@
 	<RepositoryUrl>https://github.com/AkiEvansDev/AE.CoreWPF</RepositoryUrl>
     <PackageProjectUrl>https://github.com/AkiEvansDev/AE.CoreWPF</PackageProjectUrl>
 	<NuspecFile>$(MSBuildThisFileDirectory)AE.CoreWPF.nuspec</NuspecFile>
+	  
+    <NeutralLanguage>en-US</NeutralLanguage>
+	<SatelliteResourceLanguages>en</SatelliteResourceLanguages>
   </PropertyGroup>
 	
   <ItemGroup>
@@ -71,7 +74,7 @@
 
   <ItemGroup>
     <PackageReference Include="AE.Dal" Version="1.1.0" />
-    <PackageReference Include="System.Drawing.Common" Version="8.0.3" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.4" />
   </ItemGroup>
 
   <ItemGroup>
