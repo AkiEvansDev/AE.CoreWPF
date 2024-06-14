@@ -12,7 +12,7 @@ using ModernWpf.Controls.Primitives;
 
 namespace AE.CoreWPF.Dialogs;
 
-internal class WizardDialog : Window
+internal class WizardDialog : DialogWindow
 {
 	private int currentStep = -1;
 	public ICollection<IWizardStep> Steps { get; }
@@ -34,25 +34,20 @@ internal class WizardDialog : Window
 
 	private void Layout(string finishText, string cancelText)
 	{
-		WindowHelper.SetUseModernWindowStyle(this, true);
 		TitleBar.SetExtendViewIntoTitleBar(this, true);
-		
+
 		Background = DisplayHelper.Settings.SecondaryBackgroundBrush;
 		BorderBrush = DisplayHelper.Settings.SecondaryBackgroundBrush;
 		Width = 800;
 		Height = 600;
 		ResizeMode = ResizeMode.NoResize;
-		WindowStartupLocation = WindowStartupLocation.CenterOwner;
-		WindowStyle = WindowStyle.ToolWindow;
-
-		Resources.Add("SystemControlForegroundBaseHighBrush", DisplayHelper.Settings.SecondaryForegroundBrush);
 
 		grid = new Grid();
 
 		grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(TitleBar.GetHeight(this), GridUnitType.Pixel) });
 		grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
 		grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(DisplayHelper.Settings.ControlSize + DisplayHelper.Settings.MaxSpace, GridUnitType.Pixel) });
-		
+
 		var topBorder = new Border
 		{
 			BorderBrush = DisplayHelper.Settings.StrokeBrush,

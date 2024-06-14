@@ -432,7 +432,7 @@ public static partial class DisplayHelper
 		return menu;
 	}
 
-	public static MenuItem CreateMenuItem(string text, Symbol? symbol = null, Action action = null, double? fontSize = null, double? height = null, double iconRotate = 0, Color ? color = null)
+	public static MenuItem CreateMenuItem(string text, Symbol? symbol = null, Action action = null, double? fontSize = null, double? height = null, double iconRotate = 0, Color? color = null)
 	{
 		return CreateMenuItem(text, symbol, action, null, fontSize, height, iconRotate, color);
 	}
@@ -457,8 +457,8 @@ public static partial class DisplayHelper
 			foreground = color.Value.ToBrush();
 
 		var textItem = CreateTextBlock(text, fontSize ?? Settings.FontSizeCompact2);
-		var inputGestureItem = string.IsNullOrEmpty(inputGesture) 
-			? null 
+		var inputGestureItem = string.IsNullOrEmpty(inputGesture)
+			? null
 			: CreateTertiaryTextBlock(inputGesture, Settings.FontSizeCompact);
 
 		var header = new Grid();

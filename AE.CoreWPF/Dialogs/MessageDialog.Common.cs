@@ -2,11 +2,10 @@
 using System.Windows.Controls;
 
 using ModernWpf.Controls;
-using ModernWpf.Controls.Primitives;
 
 namespace AE.CoreWPF.Dialogs;
 
-public partial class MessageDialog : Window
+public partial class MessageDialog : DialogWindow
 {
 	private MessageDialog(string message, string ok, string cancel, string close, bool showIcon)
 	{
@@ -15,18 +14,12 @@ public partial class MessageDialog : Window
 
 	private void Layout(string message, string ok, string cancel, string close, bool showIcon)
 	{
-		WindowHelper.SetUseModernWindowStyle(this, true);
-
 		Width = 300;
 		Height = 125;
 
 		Background = DisplayHelper.Settings.TertiaryBackgroundBrush;
 		BorderBrush = DisplayHelper.Settings.SecondaryBackgroundBrush;
 		ResizeMode = ResizeMode.NoResize;
-		WindowStartupLocation = WindowStartupLocation.CenterOwner;
-		WindowStyle = WindowStyle.ToolWindow;
-
-		Resources.Add("SystemControlForegroundBaseHighBrush", DisplayHelper.Settings.SecondaryForegroundBrush);
 
 		var grid = new Grid();
 
@@ -37,7 +30,7 @@ public partial class MessageDialog : Window
 
 		var textBlock = DisplayHelper.CreateTextBlock(message)
 			.SetTextPadding(DisplayHelper.Settings.MaxSpace, DisplayHelper.Settings.MinSpace, DisplayHelper.Settings.MaxSpace, DisplayHelper.Settings.MaxSpace);
-		
+
 		textBlock.MaxWidth = Width;
 		textBlock.TextWrapping = TextWrapping.Wrap;
 

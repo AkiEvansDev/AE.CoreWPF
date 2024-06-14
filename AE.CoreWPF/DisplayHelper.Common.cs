@@ -190,7 +190,7 @@ public static partial class DisplayHelper
 
 		#endregion
 		#region Menu
-		
+
 		application.Resources.Add("MenuBarHeight", Settings.ControlSizeCompact2);
 		application.Resources.Add("MenuFlyoutThemeMinHeight", 0.0);
 

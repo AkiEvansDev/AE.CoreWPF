@@ -42,7 +42,7 @@ internal class WizardStep : IWizardStep
 		if (parameters == null)
 			return;
 
-		foreach (var param in  parameters)
+		foreach (var param in parameters)
 		{
 			Values.Remove(param.Key);
 			Values.Add(param.Key, () => param.Value);
@@ -64,10 +64,10 @@ internal class WizardStep : IWizardStep
 
 public class WizardStepBuilder
 {
-    public static WizardStepBuilder Create(string title, string prev = "&=dialog_prev", string next = "&=dialog_next")
-    {
-        return new WizardStepBuilder(title, prev, next);
-    }
+	public static WizardStepBuilder Create(string title, string prev = "&=dialog_prev", string next = "&=dialog_next")
+	{
+		return new WizardStepBuilder(title, prev, next);
+	}
 
 	private WizardStep Step { get; }
 
@@ -104,7 +104,7 @@ public class WizardStepBuilder
 		return this;
 	}
 
-	public WizardStepBuilder CreateCheckBox(string name, string text, bool value = false, double? size = null, double ? fontSize = null, FontWeight? fontWeight = null)
+	public WizardStepBuilder CreateCheckBox(string name, string text, bool value = false, double? size = null, double? fontSize = null, FontWeight? fontWeight = null)
 	{
 		var panel = new SimpleStackPanel
 		{

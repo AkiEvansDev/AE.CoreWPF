@@ -13,7 +13,7 @@ using ModernWpf.Controls.Primitives;
 
 namespace AE.CoreWPF.Dialogs;
 
-public partial class FileDialog : Window
+public partial class FileDialog : DialogWindow
 {
 	public const int DefaultPanelWidth = 150;
 	public const int PreviewItemsCount = 5;
@@ -70,14 +70,10 @@ public partial class FileDialog : Window
 
 	private void Layout()
 	{
-		WindowHelper.SetUseModernWindowStyle(this, true);
-
 		Width = DefaultPanelWidth + DisplayHelper.Settings.ControlSizeCompact * FileDialogItem.PreviewScale * PreviewItemsCount + DisplayHelper.Settings.Space * (PreviewItemsCount + 2);
 		MinWidth = 600;
 		Height = 600;
 		MinHeight = 400;
-		WindowStartupLocation = WindowStartupLocation.CenterOwner;
-		WindowStyle = WindowStyle.ToolWindow;
 
 		var grid = new Grid();
 
